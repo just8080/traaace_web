@@ -5,10 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TRAAACE — Wildlife camera tagging</title>
-  <meta name="description" content="TRAAACE is a fast, offline desktop app for tagging, organising and analysing wildlife camera photos and video in Aotearoa.">
+  <meta name="description"
+    content="TRAAACE is a fast, offline desktop app for tagging, organising and analysing wildlife camera photos and video in Aotearoa.">
   <meta name="theme-color" content="#101214">
   <meta property="og:title" content="TRAAACE — Wildlife camera tagging">
-  <meta property="og:description" content="Fast, offline wildlife camera tagging for conservationists, researchers and nature enthusiasts.">
+  <meta property="og:description"
+    content="Fast, offline wildlife camera tagging for conservationists, researchers and nature enthusiasts.">
   <link rel="icon" type="image/svg+xml" href="images/noun_kakapo_7103110.svg">
   <link rel="preload" href="fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -452,7 +454,8 @@
       font-size: 0.75rem;
       color: var(--text-faint);
       margin-top: 0.6rem;
-      min-height: 3.2em; /* two lines, so the three screenshots line up */
+      min-height: 3.2em;
+      /* two lines, so the three screenshots line up */
     }
 
     /* ---- Downloads ---- */
@@ -660,7 +663,8 @@
         <a href="#features">Features</a>
         <a href="#download">Download</a>
         <a href="#install">Opening it</a>
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light theme">Light</button>
+        <button type="button" class="theme-toggle" id="theme-toggle"
+          aria-label="Switch between dark and light theme">Light</button>
       </nav>
     </div>
   </header>
@@ -732,8 +736,6 @@
             </figure>
           </article>
 
-
-          <!-- <!-- QUICK CLASSIFY CARD: add images/quick.jpg (or .png), then delete this line and the closing line below. -->
           <article class="card">
             <span class="no">04 / Quick</span>
             <h3>Quick Classify</h3>
@@ -741,14 +743,12 @@
               JSON or TXT &mdash; nothing is kept once you export.</p>
             <figure>
               <div class="shot">
-                <img src="images/quick.jpg" loading="lazy"
+                <img src="images/quick.png" loading="lazy"
                   alt="TRAAACE Quick Classify, ready to tag a folder of camera photos">
               </div>
               <figcaption>Quick Classify: no project needed, just open a folder.</figcaption>
             </figure>
           </article>
-          <!-- END OF QUICK CLASSIFY CARD --> -->
-
         </div>
       </div>
     </section>
@@ -758,7 +758,8 @@
         <div class="panel">
           <div class="panel-head">
             <h2>Download</h2>
-            <span class="release" id="release">Latest builds on <a href="https://github.com/just8080/traaace_web/releases">GitHub Releases</a></span>
+            <span class="release" id="release">Latest builds on <a
+                href="https://github.com/just8080/traaace_web/releases">GitHub Releases</a></span>
           </div>
           <p class="note">These are test builds. They are not signed with a paid developer certificate yet, so your
             computer will warn you the first time you open them &mdash; see <a href="#install">Opening it</a> below.</p>
@@ -767,20 +768,26 @@
             <div class="platform">
               <h3>macOS</h3>
               <p class="for">Apple menu &rarr; About This Mac shows your chip.</p>
-              <a class="btn btn-primary" data-download="mac-arm" href="https://github.com/just8080/traaace_web/releases">Apple Silicon <small>.dmg</small></a>
-              <a class="btn btn-secondary" data-download="mac-intel" href="https://github.com/just8080/traaace_web/releases">Intel <small>.dmg</small></a>
+              <a class="btn btn-primary" data-download="mac-arm"
+                href="https://github.com/just8080/traaace_web/releases">Apple Silicon <small>.dmg</small></a>
+              <a class="btn btn-secondary" data-download="mac-intel"
+                href="https://github.com/just8080/traaace_web/releases">Intel <small>.dmg</small></a>
             </div>
             <div class="platform">
               <h3>Windows</h3>
               <p class="for">Windows 10 and 11, 64-bit.</p>
-              <a class="btn btn-primary" data-download="windows" href="https://github.com/just8080/traaace_web/releases">Installer <small>.exe</small></a>
-              <a class="btn btn-secondary" data-download="windows-msi" href="https://github.com/just8080/traaace_web/releases">Installer <small>.msi</small></a>
+              <a class="btn btn-primary" data-download="windows"
+                href="https://github.com/just8080/traaace_web/releases">Installer <small>.exe</small></a>
+              <a class="btn btn-secondary" data-download="windows-msi"
+                href="https://github.com/just8080/traaace_web/releases">Installer <small>.msi</small></a>
             </div>
             <div class="platform">
               <h3>Linux</h3>
               <p class="for">Ubuntu and other 64-bit distributions.</p>
-              <a class="btn btn-primary" data-download="linux-deb" href="https://github.com/just8080/traaace_web/releases">Package <small>.deb</small></a>
-              <a class="btn btn-secondary" data-download="linux-appimage" href="https://github.com/just8080/traaace_web/releases">Universal <small>.AppImage</small></a>
+              <a class="btn btn-primary" data-download="linux-deb"
+                href="https://github.com/just8080/traaace_web/releases">Package <small>.deb</small></a>
+              <a class="btn btn-secondary" data-download="linux-appimage"
+                href="https://github.com/just8080/traaace_web/releases">Universal <small>.AppImage</small></a>
             </div>
           </div>
         </div>
@@ -795,9 +802,11 @@
             <summary>macOS</summary>
             <div>
               <p>Open the <code>.dmg</code>, drag TRAAACE to Applications, then right-click it and choose
-                <strong>Open</strong> (and Open again in the dialog).</p>
+                <strong>Open</strong> (and Open again in the dialog).
+              </p>
               <p>If macOS says the app is damaged, open Terminal and run
-                <code>xattr -dr com.apple.quarantine /Applications/TRAAACE.app</code></p>
+                <code>xattr -dr com.apple.quarantine /Applications/TRAAACE.app</code>
+              </p>
             </div>
           </details>
           <details>
@@ -812,7 +821,8 @@
             <div>
               <p>The simplest is the <code>.deb</code>: <code>sudo apt install ./TRAAACE_*_amd64.deb</code></p>
               <p>For the AppImage, run <code>chmod +x TRAAACE_*.AppImage</code> first. On Ubuntu you may also need
-                <code>sudo apt install libfuse2</code> (<code>libfuse2t64</code> on 24.04).</p>
+                <code>sudo apt install libfuse2</code> (<code>libfuse2t64</code> on 24.04).
+              </p>
             </div>
           </details>
         </div>
@@ -828,9 +838,9 @@
       </div>
       <div>
         <p>&copy; <span id="year">2026</span> TRAAACE</p>
-        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/" target="_blank"
-            rel="noopener" title="kakapo Icons">Noun Project</a> (<a href="https://creativecommons.org/licenses/by/3.0/"
-            target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
+            target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
+            href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
       </div>
     </div>
   </footer>
