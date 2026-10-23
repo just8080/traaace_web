@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAAACE — Wildlife camera tagging</title>
+  <meta name="description" content="TRAAACE is a fast, offline desktop app for tagging, organising and analysing wildlife camera photos and video in Aotearoa.">
+  <meta name="theme-color" content="#101214">
+  <meta property="og:title" content="TRAAACE — Wildlife camera tagging">
+  <meta property="og:description" content="Fast, offline wildlife camera tagging for conservationists, researchers and nature enthusiasts.">
+  <link rel="icon" type="image/svg+xml" href="images/noun_kakapo_7103110.svg">
+  <link rel="preload" href="fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* Set the theme before the page paints, so there is no flash. Follows the system unless the visitor chose. */
+    (function () {
+      var theme = 'dark';
+      try {
+        var saved = localStorage.getItem('traaace-theme');
+        if (saved === 'light' || saved === 'dark') theme = saved;
+        else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
+      } catch (e) { /* storage blocked: use the default */ }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ---- Fonts: the same two the app uses, hosted here ---- */
+    @font-face {
+      font-family: 'Inter';
+      src: url('fonts/Inter-roman.var.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('fonts/JetBrainsMono-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    /* ---- Design tokens: copied from the app so the two match ---- */
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --radius-xl: 10px;
+      --radius-full: 9999px;
+      --transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+      --header-h: 48px;
+      --page-w: 1080px;
+    }
+
+    :root,
+    [data-theme="dark"] {
+      --bg: #101214;
+      --surface: #181b1f;
+      --surface-raised: #21252b;
+      --border: #2d333b;
+      --border-subtle: #242930;
+      --border-strong: #444c56;
+      --text: #f0f3f6;
+      --text-muted: #9da7b3;
+      --text-faint: #636e7b;
+      --brand: #3fb950;
+      --brand-subtle: rgba(46, 160, 67, 0.15);
+      --btn: #1a7f37;
+      --btn-hover: #238636;
+      --focus: #539bf5;
+      --stage: #0e1013;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+      color-scheme: dark;
+    }
+
+    [data-theme="light"] {
+      --bg: #f6f8fa;
+      --surface: #ffffff;
+      --surface-raised: #f3f4f6;
+      --border: #d0d7de;
+      --border-subtle: #e1e4e8;
+      --border-strong: #afb8c1;
+      --text: #1f2328;
+      --text-muted: #57606a;
+      --text-faint: #8c959f;
+      --brand: #1a7f37;
+      --brand-subtle: rgba(26, 127, 55, 0.12);
+      --btn: #1a7f37;
+      --btn-hover: #2da44e;
+      --focus: #0969da;
+      --stage: #f0f2f5;
+      --shadow: 0 10px 15px -3px rgba(31, 35, 40, 0.1), 0 4px 6px -4px rgba(31, 35, 40, 0.1);
+      color-scheme: light;
+    }
+
+    /* ---- Base ---- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-h) + 1rem);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      z-index: 20;
+      padding: 0.5rem 0.9rem;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+    }
+
+    .skip:focus {
+      top: 0.75rem;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--page-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ---- Header: the same 48px bar as the app ---- */
+    .bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: var(--header-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar .wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.015em;
+    }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+    }
+
+    .bar nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .bar nav a,
+    .theme-toggle {
+      font: inherit;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      background: transparent;
+      cursor: pointer;
+      transition: color var(--transition), background-color var(--transition);
+    }
+
+    .bar nav a:hover,
+    .theme-toggle:hover {
+      color: var(--text);
+      background: var(--surface-raised);
+    }
+
+    .theme-toggle {
+      margin-left: 0.35rem;
+      border-color: var(--border);
+    }
+
+    /* ---- Buttons: the app's primary and secondary ---- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: transform var(--transition), background-color var(--transition), border-color var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--btn);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--btn-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface-raised);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-strong);
+    }
+
+    /* ---- Sections ---- */
+    main {
+      flex: 1;
+    }
+
+    section {
+      padding: 3.5rem 0 0;
+    }
+
+    .hero {
+      padding-top: 4.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--brand);
+      background: var(--brand-subtle);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.25rem;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--brand);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.35;
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      max-width: 18ch;
+      margin-bottom: 1.1rem;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 62ch;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.75rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chips li {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.15rem 0.5rem;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ---- Feature cards ---- */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: 1rem;
+    }
+
+    /* With a fourth card the grid becomes 2 x 2 instead of leaving one card alone on a second row. */
+    .cards:has(> article:nth-child(4)) {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+    }
+
+    .card .no {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--brand);
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.1rem;
+    }
+
+    figure {
+      margin-top: auto;
+    }
+
+    .shot {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: var(--stage);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+    }
+
+    .shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+    }
+
+    figcaption {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+      margin-top: 0.6rem;
+      min-height: 3.2em; /* two lines, so the three screenshots line up */
+    }
+
+    /* ---- Downloads ---- */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+    }
+
+    .panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .panel-head h2 {
+      font-size: 1.25rem;
+    }
+
+    .release {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .release a {
+      color: var(--brand);
+    }
+
+    .platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 0.75rem;
+    }
+
+    .platform {
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .platform h3 {
+      font-size: 1rem;
+    }
+
+    .platform .for {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: -0.4rem;
+    }
+
+    .platform .btn {
+      justify-content: space-between;
+    }
+
+    .btn small {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    /* ---- First-run notes ---- */
+    .steps {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    details[open] summary::after {
+      content: '–';
+    }
+
+    details>div {
+      padding: 0 1rem 1rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    details p+p {
+      margin-top: 0.5rem;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: var(--surface-raised);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.05rem 0.35rem;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .note {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      max-width: 70ch;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      margin-top: 4.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.75rem 0;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    footer .wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem 2rem;
+    }
+
+    footer a {
+      color: var(--text);
+    }
+
+    footer p+p {
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 0 1rem;
+      }
+
+      .bar nav a {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 3rem;
+      }
+
+      section {
+        padding-top: 2.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .dot {
+        animation: none;
+      }
+
+      .btn:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="TRAAACE home">
+        <img src="images/noun_kakapo_7103110.svg" alt="" width="32" height="32">
+        TRAAACE
+        <span class="tag">v0.5 alpha</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#download">Download</a>
+        <a href="#install">Opening it</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between dark and light theme">Light</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Alpha &middot; test builds available</span>
+        <h1>Wildlife camera tagging at lightning speed.</h1>
+        <p class="lead">
+          Designed for conservationists, researchers, and nature enthusiasts in Aotearoa. It makes sorting camera
+          footage effortless and responsive.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#download">Download</a>
+          <a class="btn btn-secondary" href="#features">See the features</a>
+        </div>
+        <ul class="chips" aria-label="Highlights">
+          <li>Offline first</li>
+          <li>Local database</li>
+          <li>Desktop application</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2 class="section-title">Features</h2>
+        <div class="cards">
+
+          <article class="card">
+            <span class="no">01 / Classify</span>
+            <h3>Rapid Classifier</h3>
+            <p>Tag photos with single-key hotkeys (1&ndash;9) and auto-advance to the next image without touching the
+              mouse.</p>
+            <figure>
+              <div class="shot">
+                <img src="images/classify.jpg" loading="lazy"
+                  alt="TRAAACE classifier tagging a Bellbird (Korimako) with single-key shortcuts">
+              </div>
+              <figcaption>Single-key hotkey classification with live camera details.</figcaption>
+            </figure>
+          </article>
+
+          <article class="card">
+            <span class="no">02 / Projects</span>
+            <h3>Project Library</h3>
+            <p>Scan folders automatically, track progress across deployment sites, and archive everything to a local
+              database.</p>
+            <figure>
+              <div class="shot">
+                <img src="images/projects.png" loading="lazy"
+                  alt="TRAAACE Project Library showing folder scanning and progress tracking">
+              </div>
+              <figcaption>Project Library with automatic folder scanning.</figcaption>
+            </figure>
+          </article>
+
+          <article class="card">
+            <span class="no">03 / Insights</span>
+            <h3>Activity Insights</h3>
+            <p>See when animals are most active with a 24-hour rhythm chart and a species frequency breakdown.</p>
+            <figure>
+              <div class="shot">
+                <img src="images/insights.png" loading="lazy"
+                  alt="TRAAACE Insights dashboard showing the 24-hour activity rhythm and species breakdown">
+              </div>
+              <figcaption>Insights with the daily activity rhythm and species charts.</figcaption>
+            </figure>
+          </article>
+
+
+          <!-- <!-- QUICK CLASSIFY CARD: add images/quick.jpg (or .png), then delete this line and the closing line below. -->
+          <article class="card">
+            <span class="no">04 / Quick</span>
+            <h3>Quick Classify</h3>
+            <p>Pick a folder and start tagging straight away with hotkeys and preset comments. Export to CSV, Excel,
+              JSON or TXT &mdash; nothing is kept once you export.</p>
+            <figure>
+              <div class="shot">
+                <img src="images/quick.jpg" loading="lazy"
+                  alt="TRAAACE Quick Classify, ready to tag a folder of camera photos">
+              </div>
+              <figcaption>Quick Classify: no project needed, just open a folder.</figcaption>
+            </figure>
+          </article>
+          <!-- END OF QUICK CLASSIFY CARD --> -->
+
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="wrap">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Download</h2>
+            <span class="release" id="release">Latest builds on <a href="https://github.com/just8080/traaace_web/releases">GitHub Releases</a></span>
+          </div>
+          <p class="note">These are test builds. They are not signed with a paid developer certificate yet, so your
+            computer will warn you the first time you open them &mdash; see <a href="#install">Opening it</a> below.</p>
+
+          <div class="platforms">
+            <div class="platform">
+              <h3>macOS</h3>
+              <p class="for">Apple menu &rarr; About This Mac shows your chip.</p>
+              <a class="btn btn-primary" data-download="mac-arm" href="https://github.com/just8080/traaace_web/releases">Apple Silicon <small>.dmg</small></a>
+              <a class="btn btn-secondary" data-download="mac-intel" href="https://github.com/just8080/traaace_web/releases">Intel <small>.dmg</small></a>
+            </div>
+            <div class="platform">
+              <h3>Windows</h3>
+              <p class="for">Windows 10 and 11, 64-bit.</p>
+              <a class="btn btn-primary" data-download="windows" href="https://github.com/just8080/traaace_web/releases">Installer <small>.exe</small></a>
+              <a class="btn btn-secondary" data-download="windows-msi" href="https://github.com/just8080/traaace_web/releases">Installer <small>.msi</small></a>
+            </div>
+            <div class="platform">
+              <h3>Linux</h3>
+              <p class="for">Ubuntu and other 64-bit distributions.</p>
+              <a class="btn btn-primary" data-download="linux-deb" href="https://github.com/just8080/traaace_web/releases">Package <small>.deb</small></a>
+              <a class="btn btn-secondary" data-download="linux-appimage" href="https://github.com/just8080/traaace_web/releases">Universal <small>.AppImage</small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="wrap">
+        <h2 class="section-title">Opening it the first time</h2>
+        <div class="steps">
+          <details>
+            <summary>macOS</summary>
+            <div>
+              <p>Open the <code>.dmg</code>, drag TRAAACE to Applications, then right-click it and choose
+                <strong>Open</strong> (and Open again in the dialog).</p>
+              <p>If macOS says the app is damaged, open Terminal and run
+                <code>xattr -dr com.apple.quarantine /Applications/TRAAACE.app</code></p>
+            </div>
+          </details>
+          <details>
+            <summary>Windows</summary>
+            <div>
+              <p>If SmartScreen appears, click <strong>More info</strong> &rarr; <strong>Run anyway</strong>.</p>
+              <p>TRAAACE needs Microsoft WebView2, which Windows 10 and 11 already include.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Linux (Ubuntu)</summary>
+            <div>
+              <p>The simplest is the <code>.deb</code>: <code>sudo apt install ./TRAAACE_*_amd64.deb</code></p>
+              <p>For the AppImage, run <code>chmod +x TRAAACE_*.AppImage</code> first. On Ubuntu you may also need
+                <code>sudo apt install libfuse2</code> (<code>libfuse2t64</code> on 24.04).</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <p>GNU General Public License &middot; <a href="LICENSE">View license</a></p>
+        <p>For field research &amp; backyard observation.</p>
+      </div>
+      <div>
+        <p>&copy; <span id="year">2026</span> TRAAACE</p>
+        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/" target="_blank"
+            rel="noopener" title="kakapo Icons">Noun Project</a> (<a href="https://creativecommons.org/licenses/by/3.0/"
+            target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle: the button names the theme it will switch to, like the app. */
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('theme-toggle');
+      function label() { button.textContent = root.getAttribute('data-theme') === 'dark' ? 'Light' : 'Dark'; }
+      label();
+      button.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('traaace-theme', next); } catch (e) { /* not remembered */ }
+        label();
+      });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* Download buttons: point each at the newest published release's file. The links in the HTML are the fallback. */
+    (async function () {
+      var REPO = 'just8080/traaace_web';
+      var files = {
+        'mac-arm': /_aarch64\.dmg$/, 'mac-intel': /_x64\.dmg$/,
+        'windows': /_x64-setup\.exe$/, 'windows-msi': /\.msi$/,
+        'linux-appimage': /\.AppImage$/, 'linux-deb': /\.deb$/
+      };
+      try {
+        var releases = JSON.parse(sessionStorage.getItem('traaace-releases') || 'null');
+        if (!releases) {
+          var response = await fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=5');
+          if (!response.ok) return;
+          releases = await response.json();
+          sessionStorage.setItem('traaace-releases', JSON.stringify(releases));
+        }
+        var release = releases.find(function (r) { return !r.draft && r.assets && r.assets.length; });
+        if (!release) return;
+        var label = document.getElementById('release');
+        label.textContent = 'Latest: ' + (release.name || release.tag_name) + ' · ';
+        var all = document.createElement('a');
+        all.href = release.html_url;
+        all.textContent = 'release notes';
+        label.appendChild(all);
+        Object.keys(files).forEach(function (key) {
+          var asset = release.assets.find(function (a) { return files[key].test(a.name); });
+          if (!asset) return;
+          document.querySelectorAll('[data-download="' + key + '"]').forEach(function (link) {
+            link.href = asset.browser_download_url;
+            link.title = asset.name + ' (' + (asset.size / 1048576).toFixed(1) + ' MB)';
+          });
+        });
+      } catch (err) { /* leave the fallback links */ }
+    })();
+  </script>
+</body>
+
+</html>
