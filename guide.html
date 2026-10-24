@@ -343,7 +343,7 @@
               make sure the file is clean, recognised and not upset by macOS transfer flags or line endings.</p>
             <div class="steps">
               <details open>
-                <summary>Google Sheets (easiest and most reliable on any computer)</summary>
+                <summary>Google Sheets</summary>
                 <div>
                   <p>Google Sheets processes the file in the cloud, which removes macOS extended attributes and
                     quarantine flags for you.</p>
@@ -373,7 +373,7 @@
                 </div>
               </details>
               <details>
-                <summary>LibreOffice Calc (best control over line breaks)</summary>
+                <summary>LibreOffice Calc</summary>
                 <div>
                   <ol class="steps-list">
                     <li>Open your spreadsheet in Calc.</li>
@@ -394,7 +394,7 @@
                 </div>
               </details>
               <details>
-                <summary>Excel on a Mac</summary>
+                <summary>MS Office Excel</summary>
                 <div>
                   <p>Avoid the plain &ldquo;CSV&rdquo; option, which can use old Mac line endings.</p>
                   <ol class="steps-list">
@@ -404,17 +404,6 @@
                     </li>
                     <li>Save the file.</li>
                   </ol>
-                </div>
-              </details>
-              <details>
-                <summary>Quick fix in Terminal (Mac)</summary>
-                <div>
-                  <p>If a CSV from your Mac needs to work on Windows or Linux, open Terminal and run this on the file.
-                    It changes the line endings to the Windows kind and removes the macOS quarantine and metadata flags.
-                  </p>
-<pre>sed -i '' -e $'s/\r*$/\r/' your_file.csv
-xattr -c your_file.csv</pre>
-                  <p>Replace <code>your_file.csv</code> with the name of your file.</p>
                 </div>
               </details>
             </div>
