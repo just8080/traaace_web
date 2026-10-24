@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User guide — TRAAACE</title>
+  <meta name="description"
+    content="How to use TRAAACE to tag trail camera photos and videos, keep projects, see charts and export your results, in plain language.">
+  <meta name="theme-color" content="#101214">
+  <meta property="og:title" content="TRAAACE user guide">
+  <meta property="og:description"
+    content="How to tag wildlife camera photos and videos with TRAAACE, and how to fix a CSV made on a Mac.">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/app-icon.png">
+  <link rel="apple-touch-icon" href="images/app-icon.png">
+  <link rel="preload" href="fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* Set the theme before the page paints, so there is no flash. Follows the system unless the visitor chose. */
+    (function () {
+      var theme = 'dark';
+      try {
+        var saved = localStorage.getItem('traaace-theme');
+        if (saved === 'light' || saved === 'dark') theme = saved;
+        else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
+      } catch (e) { /* storage blocked: use the default */ }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="TRAAACE home">
+        <img src="images/app-icon.png" alt="" width="36" height="36">
+        TRAAACE
+        <span class="tag">v0.5</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#download">Download</a>
+        <a href="index.html#install">Opening it</a>
+        <a href="guide.html" aria-current="page">Guide</a>
+        <button type="button" class="theme-toggle" id="theme-toggle"
+          aria-label="Switch to light theme" title="Switch to light theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>How to use TRAAACE</h1>
+        <p class="lead">
+          How to tag your trail camera photos and videos, in plain language. Everything stays on your computer.
+          The same guide is inside the app, under <strong>Guide</strong>.
+        </p>
+      </div>
+
+      <div class="guide">
+        <nav class="toc" aria-label="On this page">
+          <strong>On this page</strong>
+          <a href="#two-ways">Two ways to work</a>
+          <a href="#quick">Quick Classify</a>
+          <a href="#tagging">Tagging photos</a>
+          <a href="#comments">Comments, dates and clocks</a>
+          <a href="#folders">Project folders</a>
+          <a href="#keys">Species &amp; Keys</a>
+          <a href="#insights">Insights</a>
+          <a href="#exporting">Exporting and backups</a>
+          <a href="#shortcuts">Shortcuts</a>
+          <a href="#csv-fix">Fixing a CSV from a Mac</a>
+        </nav>
+
+        <div class="guide-body">
+
+          <section class="guide-card" id="two-ways">
+            <h2>Two ways to work</h2>
+            <p>When TRAAACE starts you choose one. You can switch later.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Quick Classify</h3>
+                <ul>
+                  <li>Best for a single card or folder you want to tag and export now.</li>
+                  <li>Nothing is kept inside TRAAACE. <strong>Export before you close</strong>, or your tags are lost.
+                  </li>
+                  <li>To switch, close the session (the red <strong>Close</strong> button), or use <em>Switch
+                      workspace&hellip;</em> in Settings.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Project Library</h3>
+                <ul>
+                  <li>Best for ongoing monitoring with many folders and cameras.</li>
+                  <li>Your folders and tags are saved on this computer as you go. Close the app and carry on later.
+                  </li>
+                  <li>Adds charts (Insights), your own species keys and comments, and combined exports.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="quick">
+            <h2>Quick Classify, step by step</h2>
+            <p>From a folder of photos to a finished spreadsheet.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Getting started</h3>
+                <ul>
+                  <li><strong>1.</strong> Drag a folder or SD card onto the window, or click it to browse. Photos and
+                    videos are both found.</li>
+                  <li><strong>2.</strong> Check the <strong>Location / Site Name</strong>. It starts as the folder name,
+                    and it goes into your spreadsheet.</li>
+                  <li><strong>3.</strong> Before you start you can change the nine species keys and the comment
+                    shortcuts on the same screen.</li>
+                  <li><strong>4.</strong> Press <strong>Start Quick Classify</strong> and tag your photos (see the next
+                    section).</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Finishing</h3>
+                <ul>
+                  <li>Press <strong>Export</strong> (top of the right-hand panel), or <kbd>Ctrl</kbd> / <kbd>Cmd</kbd>
+                    + <kbd>E</kbd>.</li>
+                  <li>Pick a folder, then which reports you want: Excel, CSV, text summary or JSON.</li>
+                  <li>Choose what happens to the photos: leave them, <strong>copy</strong> them to the export folder, or
+                    <strong>move</strong> them (moving takes them off the card).
+                  </li>
+                  <li>Tick <em>organise by species</em> to sort the copied photos into one folder per species.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="tagging">
+            <h2>Tagging photos</h2>
+            <p>Everything can be done from the keyboard. Each tag saves straight away.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Tagging</h3>
+                <ul>
+                  <li><kbd>1</kbd>&ndash;<kbd>9</kbd> tag the photo with the species on that key, then move to the next
+                    photo.</li>
+                  <li><kbd>Space</kbd> tags the photo as <strong>Empty</strong> (nothing there, or a false trigger).
+                  </li>
+                  <li><kbd>/</kbd> lets you type any other species name.</li>
+                  <li><kbd>+</kbd> and <kbd>&minus;</kbd> change the number of animals in the photo.</li>
+                  <li><strong>Auto-Advance</strong> moves on after each tag. Use the slider beside it to wait up to 3
+                    seconds first, so you can still add a count or a comment.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Looking closely</h3>
+                <ul>
+                  <li><kbd>&larr;</kbd> and <kbd>&rarr;</kbd> move between photos without changing any tag.</li>
+                  <li><kbd>G</kbd> switches between one big photo and a grid of thumbnails.</li>
+                  <li>Scroll the mouse wheel to zoom in, then drag to move around. <strong>Fit</strong> shows the whole
+                    photo again.</li>
+                  <li>Videos are paused at the start. Click the picture or the play button to watch, and use the bar to
+                    skip. Some video types can&rsquo;t be played inside TRAAACE, but you can still tag them.</li>
+                  <li>Drag the edge of the right-hand panel to make it wider or narrower.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="comments">
+            <h2>Comments, dates and clocks</h2>
+            <p>Add a note to a photo, or correct a camera clock that is wrong.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Comments</h3>
+                <ul>
+                  <li>Press <kbd>C</kbd> to jump to the comment box.</li>
+                  <li>Use <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to pick a ready-made comment and <kbd>Enter</kbd> to add
+                    it. Or just type your own, such as <em>&ldquo;Ear tag 42&rdquo;</em>.</li>
+                  <li>Comments end up in the <strong>Comment</strong> column of your spreadsheet.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Fixing a wrong date or time</h3>
+                <ul>
+                  <li>Click the pencil beside the date above the photo.</li>
+                  <li>Set the correct date and time for that photo.</li>
+                  <li>Tick <em>Shift all subsequent photos by the same offset</em> to move every later photo by the same
+                    amount. This is the quick way to fix a clock that was set wrong.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="folders">
+            <h2>Project Library: your folders</h2>
+            <p>In the Projects tab, choose one <strong>Working Folder</strong> that holds a subfolder for each camera or
+              site. TRAAACE finds them for you.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>How your folders are found</h3>
+                <ul>
+                  <li>Every subfolder of the Working Folder becomes a card in the list. Camera card layouts with a
+                    <code>DCIM</code> folder are found too.
+                  </li>
+                  <li>Set where exports go in <strong>Export Folder</strong>, on the same page.</li>
+                  <li>Click a folder&rsquo;s site name to change its location. It is used in charts and exports.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>What the labels mean</h3>
+                <ul>
+                  <li><strong>Unclassified:</strong> nothing tagged yet.</li>
+                  <li><strong>In Progress:</strong> some photos tagged. Open it again and carry on.</li>
+                  <li><strong>Archived:</strong> every photo is tagged, or the photos have been moved off this computer.
+                    Your tags are kept either way.</li>
+                  <li><strong>Exported:</strong> the folder has been exported.</li>
+                  <li><strong>Removing a folder</strong> deletes its tags from TRAAACE. If the folder is still inside
+                    your Working Folder, it will appear again, untagged. Your photos are only deleted if you tick the
+                    box that says so.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="keys">
+            <h2>Species &amp; Keys (Project Library)</h2>
+            <p>Choose which species sit on which keys, and keep a list of ready-made comments.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Your species keys</h3>
+                <ul>
+                  <li>The top nine species in the list are keys <kbd>1</kbd>&ndash;<kbd>9</kbd>. <kbd>Space</kbd> is
+                    always Empty.</li>
+                  <li>Drag a row, or use the &#9650; &#9660; buttons, to move a species up or down. Put the animals you
+                    see most in the first few spots.</li>
+                  <li><strong>+ Add Keymap / Species</strong> adds a species and the key or letters to press for it.
+                  </li>
+                  <li>A shortcut can be one letter or a few (for example P and PG). If two start the same way, TRAAACE
+                    waits a moment for the next key.</li>
+                  <li><strong>Delete</strong> removes one. <strong>Reset Keys to Defaults</strong> brings back the New
+                    Zealand starter list.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Comment presets</h3>
+                <ul>
+                  <li>Add your own with <strong>+ Add Comment Preset</strong>, or remove ones you never use.</li>
+                  <li>The starter list is: False trigger, Multiple animals, Poor quality / blurry, Juvenile / young in
+                    frame, Injured animal, Camera moved / obstruction.</li>
+                  <li><strong>Reset Comments</strong> returns to that list.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="insights">
+            <h2>Insights</h2>
+            <p>Charts built from the photos you have tagged. Nothing to set up.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>What you can see</h3>
+                <ul>
+                  <li>Summary boxes: how many camera triggers there were, how many animals were counted, the busiest
+                    hours, and the most common species.</li>
+                  <li><strong>Observation Activity Over Time:</strong> bars across the dates you chose. Hover a bar for
+                    its exact number.</li>
+                  <li><strong>Species Composition:</strong> which species make up your detections.</li>
+                  <li><strong>24-Hour Activity Rhythm:</strong> when animals are active, shaded by night, dawn, day and
+                    dusk.</li>
+                  <li><strong>Camera Sites:</strong> how busy each site is.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Narrowing it down</h3>
+                <ul>
+                  <li>Pick <strong>Week, Month, Year, All</strong> or <strong>Custom</strong> to choose your own start
+                    and end dates.</li>
+                  <li>Filter by site, project, species, or by photos and videos.</li>
+                  <li><strong>Animals</strong> counts every animal. <strong>Frames</strong> counts photos or videos that
+                    had something in them.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="exporting">
+            <h2>Exporting, backups and importing</h2>
+            <p>Get your results out, and keep a safe copy.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Exporting from a project</h3>
+                <ul>
+                  <li>Tick one or more folders on the Projects tab, then press <strong>Export Selected</strong>. Several
+                    folders can go into one combined spreadsheet.</li>
+                  <li>You can also copy the photos, either sorted into a folder per species or kept in their original
+                    folders.</li>
+                  <li>Every spreadsheet has these columns: Folder, File, Media Type, Site Name, Date, Time, Species,
+                    Animal Count, Comment.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Settings</h3>
+                <ul>
+                  <li><strong>Backup &amp; Restore</strong> saves everything TRAAACE has stored into one zip file, and
+                    restores it later or on another computer.</li>
+                  <li><strong>CSV Import</strong> brings in results from an earlier TRAAACE export or your own
+                    spreadsheet. If the file came from a Mac, see <a href="#csv-fix">Fixing a CSV from a Mac</a>.</li>
+                  <li><strong>Interface Scaling</strong> makes everything bigger or smaller. <kbd>Ctrl</kbd> /
+                    <kbd>Cmd</kbd> with <kbd>+</kbd>, <kbd>&minus;</kbd> or <kbd>0</kbd> works anywhere.
+                  </li>
+                  <li><kbd>F11</kbd> switches full screen on and off.</li>
+                  <li><strong>Welcome Screen</strong> lets you choose whether it shows every time TRAAACE starts.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="shortcuts">
+            <h2>Shortcuts at a glance</h2>
+            <div class="keys">
+              <div class="key-row"><span>Tag with a species<small>Then move to the next photo</small></span><kbd>1&ndash;9</kbd></div>
+              <div class="key-row"><span>Empty / false trigger<small>Tag as Empty</small></span><kbd>Space</kbd></div>
+              <div class="key-row"><span>Type another species<small>For anything not on a key</small></span><kbd>/</kbd></div>
+              <div class="key-row"><span>Number of animals<small>Add or take away one</small></span><kbd>+ / &minus;</kbd></div>
+              <div class="key-row"><span>Previous / next photo<small>Does not change any tag</small></span><kbd>&larr; / &rarr;</kbd></div>
+              <div class="key-row"><span>Single photo or grid<small>Switch the view</small></span><kbd>G</kbd></div>
+              <div class="key-row"><span>Add a comment<small>Then &uarr; &darr; to pick, Enter to add</small></span><kbd>C</kbd></div>
+              <div class="key-row"><span>Export (Quick Classify)<small>Opens the export window</small></span><kbd>Ctrl/Cmd + E</kbd></div>
+              <div class="key-row"><span>Make everything bigger or smaller<small>Back to normal with 0</small></span><kbd>Ctrl/Cmd + + / &minus;</kbd></div>
+              <div class="key-row"><span>Full screen<small>Press again to leave</small></span><kbd>F11</kbd></div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="csv-fix">
+            <h2>Fixing a CSV made on a Mac</h2>
+            <p>If you create or edit a CSV on macOS and open it in TRAAACE on Windows or Linux, use one of these to
+              make sure the file is clean, recognised and not upset by macOS transfer flags or line endings.</p>
+            <div class="steps">
+              <details open>
+                <summary>Google Sheets (easiest and most reliable on any computer)</summary>
+                <div>
+                  <p>Google Sheets processes the file in the cloud, which removes macOS extended attributes and
+                    quarantine flags for you.</p>
+                  <ol class="steps-list">
+                    <li>Open <a href="https://sheets.google.com/" target="_blank" rel="noopener">Google Sheets</a> and
+                      create a blank sheet.</li>
+                    <li>Go to <strong>File &rarr; Import &rarr; Upload</strong> and choose your CSV.</li>
+                    <li>Check the dates. If needed, select the Date column, go to <strong>Format &rarr; Number &rarr;
+                        Custom date and time</strong>, and pick <code>YYYY-MM-DD</code> (or <code>DD/MM/YYYY</code>).
+                    </li>
+                    <li>Go to <strong>File &rarr; Download &rarr; Comma Separated Values (.csv)</strong>.</li>
+                    <li>This file can be opened directly in TRAAACE on Windows or Linux.</li>
+                  </ol>
+                </div>
+              </details>
+              <details>
+                <summary>ONLYOFFICE Desktop</summary>
+                <div>
+                  <ol class="steps-list">
+                    <li>Open your data in ONLYOFFICE.</li>
+                    <li>Go to <strong>File &rarr; Save As&hellip;</strong>.</li>
+                    <li>In the format list, choose <strong>CSV (Comma Delimited) (*.csv)</strong>.</li>
+                    <li>If a dialog appears, set <strong>Encoding</strong> to <strong>UTF-8</strong> and
+                      <strong>Delimiter</strong> to <strong>Comma</strong>.
+                    </li>
+                  </ol>
+                </div>
+              </details>
+              <details>
+                <summary>LibreOffice Calc (best control over line breaks)</summary>
+                <div>
+                  <ol class="steps-list">
+                    <li>Open your spreadsheet in Calc.</li>
+                    <li>Go to <strong>File &rarr; Save As&hellip;</strong>.</li>
+                    <li>Choose <strong>Text CSV (.csv)</strong> and tick <strong>Edit filter settings</strong>.</li>
+                    <li>Click <strong>Save</strong>.</li>
+                    <li>In the dialog that appears:
+                      <ul>
+                        <li><strong>Character set:</strong> Unicode (UTF-8)</li>
+                        <li><strong>Field delimiter:</strong> <code>,</code> (comma)</li>
+                        <li><strong>String delimiter:</strong> <code>"</code> (double quote)</li>
+                        <li>Tick <strong>Save cell content as shown</strong>, so formatted dates are saved exactly as
+                          they look.</li>
+                      </ul>
+                    </li>
+                    <li>Click <strong>OK</strong>.</li>
+                  </ol>
+                </div>
+              </details>
+              <details>
+                <summary>Excel on a Mac</summary>
+                <div>
+                  <p>Avoid the plain &ldquo;CSV&rdquo; option, which can use old Mac line endings.</p>
+                  <ol class="steps-list">
+                    <li>Go to <strong>File &rarr; Save As&hellip;</strong>.</li>
+                    <li>In <strong>File Format</strong>, choose <strong>CSV UTF-8 (Comma-delimited) (.csv)</strong> or
+                      <strong>Windows Comma Separated (.csv)</strong>.
+                    </li>
+                    <li>Save the file.</li>
+                  </ol>
+                </div>
+              </details>
+              <details>
+                <summary>Quick fix in Terminal (Mac)</summary>
+                <div>
+                  <p>If a CSV from your Mac needs to work on Windows or Linux, open Terminal and run this on the file.
+                    It changes the line endings to the Windows kind and removes the macOS quarantine and metadata flags.
+                  </p>
+<pre>sed -i '' -e $'s/\r*$/\r/' your_file.csv
+xattr -c your_file.csv</pre>
+                  <p>Replace <code>your_file.csv</code> with the name of your file.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <p>GNU General Public License &middot; <a href="LICENSE">View license</a></p>
+        <p>For field research &amp; backyard observation.</p>
+      </div>
+      <div>
+        <p>&copy; <span id="year">2026</span> TRAAACE</p>
+        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
+            target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
+            href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle: the icon shows the theme it will switch to, like the app. */
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('theme-toggle');
+      function label() {
+        var text = 'Switch to ' + (root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark') + ' theme';
+        button.setAttribute('aria-label', text);
+        button.title = text;
+      }
+      label();
+      button.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('traaace-theme', next); } catch (e) { /* not remembered */ }
+        label();
+      });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
