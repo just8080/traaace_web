@@ -631,6 +631,11 @@ footer p+p {
 }
 
 /* ---- User guide page ---- */
+/* A wider page than the home page, so the two-column boxes are not cramped. The header and footer match. */
+.guide-page {
+  --page-w: 1400px;
+}
+
 .page-head {
   padding-top: 3.5rem;
 }
@@ -643,8 +648,8 @@ footer p+p {
 
 .guide {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 3rem;
   align-items: start;
   padding-top: 2.5rem;
 }
