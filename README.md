@@ -21,16 +21,11 @@ Every export (Excel, CSV, TXT, JSON) adheres to the identical, clear 9-column st
 | **Animal Count** | Number of individuals observed in frame | `2` |
 | **Comment** | Notes, behavior, or observation remarks | `Foraging near burrow` |
 
-- **Excel (`.xlsx`)**: Formatted spreadsheet with custom headers, styled cells, and optimized column widths.
-- **CSV (`.csv`)**: Clean comma-separated values formatted with a UTF-8 Byte Order Mark (BOM) for direct compatibility with Microsoft Excel and R.
-- **Manifest (`.txt`)**: Human-readable text report containing summary statistics, species breakdown frequencies, and tabular observations.
-- **JSON (`.json`)**: Structured JSON records suitable for data pipelines and scientific repositories.
-
 ---
 
 ## 🙏 Credits
 
-Kakapo logo: [Kakapo by Cimrin](https://thenounproject.com/browse/icons/term/kakapo/) from Noun Project, licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). The credit is also shown in the app on the welcome screen and in the Guide.
+Kakapo logo: [Kakapo by Cimrin](https://thenounproject.com/browse/icons/term/kakapo/) from Noun Project, licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 ---
 
