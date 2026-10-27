@@ -29,7 +29,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 
 <body class="guide-page">
@@ -40,7 +40,7 @@
       <a class="brand" href="index.html" aria-label="TRAAACE home">
         <img src="images/app-icon.png" alt="" width="36" height="36">
         TRAAACE
-        <span class="tag">v0.5</span>
+        <span class="tag">v0.6</span>
       </a>
       <nav aria-label="Main">
         <a href="index.html#features">Features</a>
@@ -83,6 +83,7 @@
           <a href="#folders">Project folders</a>
           <a href="#keys">Species &amp; Keys</a>
           <a href="#insights">Insights</a>
+          <a href="#ai">AI suggestions</a>
           <a href="#exporting">Exporting and backups</a>
           <a href="#shortcuts">Shortcuts</a>
           <a href="#csv-fix">Guide to uploading CSV files</a>
@@ -247,7 +248,7 @@
                     always Empty.</li>
                   <li>Drag a row, or use the &#9650; &#9660; buttons, to move a species up or down. Put the animals you
                     see most in the first few spots.</li>
-                  <li><strong>+ Add Keymap / Species</strong> adds a species and the key or letters to press for it.
+                  <li><strong>Add Keymap / Species</strong> adds a species and the key or letters to press for it.
                   </li>
                   <li>A shortcut can be one letter or a few (for example P and PG). If two start the same way, TRAAACE
                     waits a moment for the next key.</li>
@@ -258,7 +259,7 @@
               <div class="inner">
                 <h3>Comment presets</h3>
                 <ul>
-                  <li>Add your own with <strong>+ Add Comment Preset</strong>, or remove ones you never use.</li>
+                  <li>Add your own with <strong>Add Comment Preset</strong>, or remove ones you never use.</li>
                   <li>The starter list is: False trigger, Multiple animals, Poor quality / blurry, Juvenile / young in
                     frame, Injured animal, Camera moved / obstruction.</li>
                   <li><strong>Reset Comments</strong> returns to that list.</li>
@@ -294,6 +295,55 @@
                     had something in them.</li>
                 </ul>
               </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="ai">
+            <h2>AI suggestions (optional)</h2>
+            <p>TRAAACE can suggest the species and number of animals in each photo or video. It all happens on your
+              computer; nothing is uploaded.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Setting up</h3>
+                <ul>
+                  <li>Click <strong>Set up AI…</strong> in the AI suggestions box on the right. TRAAACE downloads the AI
+                    add-on (about 520 MB) once, and checks it before installing.</li>
+                  <li>Works on Macs with Apple Silicon (M1 or newer), Windows and Linux. Not on Intel Macs.</li>
+                  <li>To take it off again, open the same window and choose <strong>Remove the add-on…</strong>.</li>
+                </ul>
+                <img class="guide-shot guide-shot-small" src="images/setup_ai.webp" width="640" height="284" loading="lazy"
+                  alt="The AI suggestions box with its Set up AI button">
+              </div>
+              <div class="inner">
+                <h3>Using it</h3>
+                <ul>
+                  <li>Open a folder and press <strong>Scan … with AI</strong>. A photo takes a few seconds on most
+                    computers, much less on an Apple Silicon Mac. Videos are checked a frame every half second,
+                    so they take much longer than photos. On an older computer you may prefer to tag videos yourself
+                    and scan only the photos.</li>
+                  <li>Each photo shows the best guess and how sure the AI is. Press <strong>Accept</strong> to tag it, or
+                    pick one of the other guesses. <strong>Accept … suggestions</strong> tags all the confident ones at
+                    once.</li>
+                  <li>The AI never tags anything by itself. Check its guesses, especially for animals that look alike,
+                    such as stoat and weasel, or rat and mouse.</li>
+                  <li>A species without its own key counts under your <strong>Bird</strong> or <strong>Other</strong> key.
+                    Your spreadsheet keeps the exact species.</li>
+                </ul>
+                <img class="guide-shot guide-shot-small" src="images/vidandphoto_button.webp" width="666" height="188" loading="lazy"
+                  alt="The Scan 20 photos and 7 videos with AI button">
+              </div>
+            </div>
+            <div class="cols guide-shots">
+              <figure>
+                <img class="guide-shot" src="images/ai_species.webp" width="1220" height="1440" loading="lazy"
+                  alt="The AI add-on download window: what it is, its size, credits and licences, and the Download and install button">
+                <figcaption>Before downloading: size, credits and licences.</figcaption>
+              </figure>
+              <figure>
+                <img class="guide-shot" src="images/ai_installed.webp" width="1222" height="668" loading="lazy"
+                  alt="The AI add-on window once installed, with Remove the add-on, Check for updates and Done">
+                <figcaption>Once installed: check for updates, or remove it.</figcaption>
+              </figure>
             </div>
           </section>
 
@@ -436,13 +486,18 @@
       <div>
         <p>GNU General Public License</p>
         <p>For field research &amp; backyard observation.</p>
-        <div>
-          <p>&copy; <span id="year">2026</span> TRAAACE</p>
-          <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
-              target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
-              href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
-        </div>
+        <p>Contact: <a href="mailto:hello@traaace.ing">hello@traaace.ing</a></p>
       </div>
+      <div>
+        <p>&copy; <span id="year">2026</span> TRAAACE</p>
+        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
+            target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
+            href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+        <p>AI suggestions: <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita</a> by Olly and
+              wekaResearch with the DOC Predator Science team, and <a href="https://github.com/agentmorris/MegaDetector"
+              target="_blank" rel="noopener">MegaDetector</a> by Dan Morris and contributors</p>
+      </div>
+    </div>
   </footer>
 
   <script>
