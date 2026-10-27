@@ -83,6 +83,7 @@
           <a href="#folders">Project folders</a>
           <a href="#keys">Species &amp; Keys</a>
           <a href="#insights">Insights</a>
+          <a href="#ai">AI suggestions</a>
           <a href="#exporting">Exporting and backups</a>
           <a href="#shortcuts">Shortcuts</a>
           <a href="#csv-fix">Guide to uploading CSV files</a>
@@ -247,7 +248,7 @@
                     always Empty.</li>
                   <li>Drag a row, or use the &#9650; &#9660; buttons, to move a species up or down. Put the animals you
                     see most in the first few spots.</li>
-                  <li><strong>+ Add Keymap / Species</strong> adds a species and the key or letters to press for it.
+                  <li><strong>Add Keymap / Species</strong> adds a species and the key or letters to press for it.
                   </li>
                   <li>A shortcut can be one letter or a few (for example P and PG). If two start the same way, TRAAACE
                     waits a moment for the next key.</li>
@@ -258,7 +259,7 @@
               <div class="inner">
                 <h3>Comment presets</h3>
                 <ul>
-                  <li>Add your own with <strong>+ Add Comment Preset</strong>, or remove ones you never use.</li>
+                  <li>Add your own with <strong>Add Comment Preset</strong>, or remove ones you never use.</li>
                   <li>The starter list is: False trigger, Multiple animals, Poor quality / blurry, Juvenile / young in
                     frame, Injured animal, Camera moved / obstruction.</li>
                   <li><strong>Reset Comments</strong> returns to that list.</li>
@@ -292,6 +293,37 @@
                   <li>Filter by site, project, species, or by photos and videos.</li>
                   <li><strong>Animals</strong> counts every animal. <strong>Frames</strong> counts photos or videos that
                     had something in them.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="guide-card" id="ai">
+            <h2>AI suggestions (optional)</h2>
+            <p>TRAAACE can suggest the species and number of animals in each photo or video. It all happens on your
+              computer; nothing is uploaded.</p>
+            <div class="cols">
+              <div class="inner">
+                <h3>Setting up</h3>
+                <ul>
+                  <li>Click <strong>Set up AI…</strong> in the AI suggestions box on the right. TRAAACE downloads the AI
+                    add-on (about 520 MB) once, and checks it before installing.</li>
+                  <li>Works on Macs with Apple Silicon (M1 or newer), Windows and Linux. Not on Intel Macs.</li>
+                  <li>To take it off again, open the same window and choose <strong>Remove the add-on…</strong>.</li>
+                </ul>
+              </div>
+              <div class="inner">
+                <h3>Using it</h3>
+                <ul>
+                  <li>Open a folder and press <strong>Scan … with AI</strong>. A photo takes a few seconds on most
+                    computers, much less on an Apple Silicon Mac. Videos are checked a frame every half second.</li>
+                  <li>Each photo shows the best guess and how sure the AI is. Press <strong>Accept</strong> to tag it, or
+                    pick one of the other guesses. <strong>Accept … suggestions</strong> tags all the confident ones at
+                    once.</li>
+                  <li>The AI never tags anything by itself. Check its guesses, especially for animals that look alike,
+                    such as stoat and weasel, or rat and mouse.</li>
+                  <li>A species without its own key counts under your <strong>Bird</strong> or <strong>Other</strong> key.
+                    Your spreadsheet keeps the exact species.</li>
                 </ul>
               </div>
             </div>
@@ -441,6 +473,9 @@
           <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
               target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
               href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+          <p>AI suggestions: <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita</a> by Olly and
+              wekaResearch with the DOC Predator Science team, and <a href="https://github.com/agentmorris/MegaDetector"
+              target="_blank" rel="noopener">MegaDetector</a> by Dan Morris and contributors</p>
         </div>
       </div>
   </footer>
