@@ -871,3 +871,33 @@ pre {
 .guide-card .steps {
   gap: 0.75rem;
 }
+
+
+/* Screenshots in the guide */
+.guide-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  background: var(--stage);
+}
+
+.guide-shot-small {
+  max-width: 340px;
+}
+
+.guide-shots {
+  margin-top: 1rem;
+  align-items: start;
+}
+
+.guide-shots figure {
+  margin: 0;
+}
+
+.guide-shots figcaption {
+  min-height: 0;
+}
