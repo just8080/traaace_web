@@ -586,6 +586,17 @@ footer .wrap {
   gap: 0.75rem 2rem;
 }
 
+/* Keep the two columns side by side on the narrower home page, as on the wide guide page. */
+@media (min-width: 641px) {
+  footer .wrap {
+    flex-wrap: nowrap;
+  }
+
+  footer .wrap>div:last-child {
+    min-width: 0;
+  }
+}
+
 footer a {
   color: var(--text);
 }
