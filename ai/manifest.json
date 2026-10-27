@@ -1,0 +1,343 @@
+{
+  "schema": 1,
+  "pack": "traaace-ai",
+  "version": "1.0.0",
+  "published": "2026-10-27T00:01:08Z",
+  "min_app_version": "0.6.0",
+  "notice": {
+    "title": "AI species detection",
+    "requires_acceptance": true,
+    "credits": [
+      "Alita (New Zealand species classifier), version 3.03: Olly and wekaResearch, with the Department of Conservation Predator Science team. Everyone involved is listed at https://github.com/Wologman/Alita",
+      "MegaDetector v5a (animal detection): Dan Morris and contributors, https://github.com/agentmorris/MegaDetector",
+      "ONNX Runtime: Microsoft, MIT licence",
+      "FFmpeg (video tool): https://ffmpeg.org, LGPL"
+    ],
+    "licenses": [
+      "GPL-3.0 (the models, inherited from MegaDetector / YOLOv5)",
+      "MIT (ONNX Runtime)",
+      "LGPL v2.1 or later (FFmpeg)"
+    ]
+  },
+  "model": {
+    "id": "alita-3.03",
+    "display_name": "Alita (New Zealand species)",
+    "classes": 81,
+    "detector_component": "detector",
+    "classifier_component": "classifier",
+    "class_names_component": "class-names",
+    "name_map_component": "name-map",
+    "defaults": {
+      "classifier_threshold": 0.5,
+      "detector_empty_threshold": 0.15,
+      "count_threshold": 0.2
+    },
+    "score_kind": "uncalibrated",
+    "calibration": null,
+    "source": {
+      "name": "Alita 3.03 official release (Exp_60, run_01), converted to ONNX by TRAAACE with the author's permission"
+    }
+  },
+  "components": [
+    {
+      "id": "onnxruntime-macos-aarch64",
+      "label": "ONNX Runtime (runs the models)",
+      "kind": "runtime",
+      "platforms": [
+        "macos-aarch64"
+      ],
+      "install_path": "runtime/libonnxruntime.1.31.0.dylib",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/onnxruntime-macos-aarch64.gz",
+        "compression": "gzip",
+        "size": 12566308,
+        "sha256": "f654e0bc599918df99414176981134ce23170c25d1e141f5d790920c28b91def"
+      },
+      "unpacked": {
+        "size": 44830288,
+        "sha256": "2a50a63e7f41f8d4d551d3ee47248df3864f6540109fce8ad520ca3b51af4b70"
+      }
+    },
+    {
+      "id": "onnxruntime-windows-x86_64",
+      "label": "ONNX Runtime (runs the models)",
+      "kind": "runtime",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/onnxruntime.dll",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/onnxruntime-windows-x86_64.gz",
+        "compression": "gzip",
+        "size": 6331963,
+        "sha256": "ce706a726ec38f11aa9e8790fe79aecab252d630f22f921243323120d97d4e61"
+      },
+      "unpacked": {
+        "size": 17253176,
+        "sha256": "0c42dc4e278f0968fdf9ebf1b1e54a74c657a9942e70803e453c91993451cf4c"
+      }
+    },
+    {
+      "id": "onnxruntime-linux-x86_64",
+      "label": "ONNX Runtime (runs the models)",
+      "kind": "runtime",
+      "platforms": [
+        "linux-x86_64"
+      ],
+      "install_path": "runtime/libonnxruntime.so.1.31.0",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/onnxruntime-linux-x86_64.gz",
+        "compression": "gzip",
+        "size": 11156839,
+        "sha256": "d09bf0f1a3f0289860455c52fc41632a5878a978a7da1cb957d36b1357a91dd4"
+      },
+      "unpacked": {
+        "size": 29345384,
+        "sha256": "469849977cb60744ea160927e1a3a0643fd4c55c0aff743251c6d293402e334e"
+      }
+    },
+    {
+      "id": "onnxruntime-licence",
+      "label": "ONNX Runtime licence",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "runtime/ONNXRUNTIME-LICENSE.txt",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/onnxruntime-licence.txt",
+        "compression": "none",
+        "size": 1073,
+        "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+      },
+      "unpacked": {
+        "size": 1073,
+        "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+      }
+    },
+    {
+      "id": "ffmpeg-macos-aarch64",
+      "label": "Video tool (FFmpeg)",
+      "kind": "tool",
+      "platforms": [
+        "macos-aarch64"
+      ],
+      "install_path": "tools/ffmpeg",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-macos-aarch64.gz",
+        "compression": "gzip",
+        "size": 1804543,
+        "sha256": "150ee241a1cbc722423f03f9b973e931ddc8b3543a14dea7e01995bcef24c052"
+      },
+      "unpacked": {
+        "size": 4007080,
+        "sha256": "d87c45ac687e295b75044583e851d97f4bfc5658a191eb1683cc42257f175c16"
+      }
+    },
+    {
+      "id": "ffmpeg-source-macos-aarch64",
+      "label": "Video tool source details",
+      "kind": "data",
+      "platforms": [
+        "macos-aarch64"
+      ],
+      "install_path": "tools/FFMPEG-SOURCE.txt",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-source-macos-aarch64.txt",
+        "compression": "none",
+        "size": 884,
+        "sha256": "c591673ace6f3c0bf66336e5e08f7e7b352c581db7ccc622f62b91c4ba27fd36"
+      },
+      "unpacked": {
+        "size": 884,
+        "sha256": "c591673ace6f3c0bf66336e5e08f7e7b352c581db7ccc622f62b91c4ba27fd36"
+      }
+    },
+    {
+      "id": "ffmpeg-windows-x86_64",
+      "label": "Video tool (FFmpeg)",
+      "kind": "tool",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "tools/ffmpeg.exe",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-windows-x86_64.gz",
+        "compression": "gzip",
+        "size": 1940926,
+        "sha256": "a1c459901d7610a771a19f5ad3d2fd7f59cf84bfa19cf3a2d22d2808d576f477"
+      },
+      "unpacked": {
+        "size": 5415424,
+        "sha256": "9ec5cb636650f9c43d5370226f6e2ce9df5a46942562f0185507d691c9952d72"
+      }
+    },
+    {
+      "id": "ffmpeg-source-windows-x86_64",
+      "label": "Video tool source details",
+      "kind": "data",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "tools/FFMPEG-SOURCE.txt",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-source-windows-x86_64.txt",
+        "compression": "none",
+        "size": 976,
+        "sha256": "ae5a476418e14d3bc6be45f57d5dab70bfbfc546943f61e876c55f377a09794b"
+      },
+      "unpacked": {
+        "size": 976,
+        "sha256": "ae5a476418e14d3bc6be45f57d5dab70bfbfc546943f61e876c55f377a09794b"
+      }
+    },
+    {
+      "id": "ffmpeg-linux-x86_64",
+      "label": "Video tool (FFmpeg)",
+      "kind": "tool",
+      "platforms": [
+        "linux-x86_64"
+      ],
+      "install_path": "tools/ffmpeg",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-linux-x86_64.gz",
+        "compression": "gzip",
+        "size": 2539951,
+        "sha256": "d77a9e599e7a6c555b80bc4a6869b09ec74826d073e05a544643fbc5cd9d31c2"
+      },
+      "unpacked": {
+        "size": 6629032,
+        "sha256": "8ae5299cd483c0be3b15e234dfeef7295fcb8527f0fa1afea70761291da5082d"
+      }
+    },
+    {
+      "id": "ffmpeg-source-linux-x86_64",
+      "label": "Video tool source details",
+      "kind": "data",
+      "platforms": [
+        "linux-x86_64"
+      ],
+      "install_path": "tools/FFMPEG-SOURCE.txt",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-source-linux-x86_64.txt",
+        "compression": "none",
+        "size": 935,
+        "sha256": "e214e75ba9e6796cb95a69107150cde779e32075cf3244e2de73b0e34c37e619"
+      },
+      "unpacked": {
+        "size": 935,
+        "sha256": "e214e75ba9e6796cb95a69107150cde779e32075cf3244e2de73b0e34c37e619"
+      }
+    },
+    {
+      "id": "ffmpeg-licence",
+      "label": "Video tool licence",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "tools/FFMPEG-LICENSE.txt",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/ffmpeg-licence.txt",
+        "compression": "none",
+        "size": 26517,
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+      },
+      "unpacked": {
+        "size": 26517,
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+      }
+    },
+    {
+      "id": "detector",
+      "label": "Animal detector",
+      "kind": "model",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/detector.onnx",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/detector.gz",
+        "compression": "gzip",
+        "size": 448887213,
+        "sha256": "758a853d29081a8d06f64cfdbfb62ed74b980d5a38dd3e5cfafc4341f39d2aa1"
+      },
+      "unpacked": {
+        "size": 561710008,
+        "sha256": "9c6f27127c3b9485c22ef930e9f5c652bd54b5d6d3f0a2a76df50d6104c4e981"
+      }
+    },
+    {
+      "id": "classifier",
+      "label": "Species classifier",
+      "kind": "model",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/classifier.onnx",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/classifier.gz",
+        "compression": "gzip",
+        "size": 78245912,
+        "sha256": "101493b3acaccb6e5a47ea80e1f136a5486fed458f8677895a440c0462b0ecce"
+      },
+      "unpacked": {
+        "size": 84113605,
+        "sha256": "942dbb724012e52ad3491db4202ef08e29944f907043a593768b0bb528b14da2"
+      }
+    },
+    {
+      "id": "class-names",
+      "label": "Species list",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/class_names.json",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/class-names.json",
+        "compression": "none",
+        "size": 966,
+        "sha256": "4cd3ac8ed0ddcd762d3873381b244dc173d45acf9bfd0c25db19a2abb5d27f65"
+      },
+      "unpacked": {
+        "size": 966,
+        "sha256": "4cd3ac8ed0ddcd762d3873381b244dc173d45acf9bfd0c25db19a2abb5d27f65"
+      }
+    },
+    {
+      "id": "name-map",
+      "label": "Species names",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/name_map.csv",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-v1.0.0/name-map.csv",
+        "compression": "none",
+        "size": 3852,
+        "sha256": "28e7fb3e208ecbb27d8ca972714e88ec032d49b908687c96fda7c82f367f570d"
+      },
+      "unpacked": {
+        "size": 3852,
+        "sha256": "28e7fb3e208ecbb27d8ca972714e88ec032d49b908687c96fda7c82f367f570d"
+      }
+    }
+  ]
+}
