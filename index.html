@@ -18,10 +18,10 @@
 
   <script>
     /* Set the theme before the page paints, so there is no flash. Follows the system unless the visitor chose. */
-    (function () {
-      var theme = 'dark';
+    (() => {
+      let theme = 'dark';
       try {
-        var saved = localStorage.getItem('traaace-theme');
+        const saved = localStorage.getItem('traaace-theme');
         if (saved === 'light' || saved === 'dark') theme = saved;
         else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
       } catch (e) { /* storage blocked: use the default */ }
@@ -246,17 +246,17 @@
 
   <script>
     /* Theme toggle: the icon shows the theme it will switch to, like the app. */
-    (function () {
-      var root = document.documentElement;
-      var button = document.getElementById('theme-toggle');
-      function label() {
-        var text = 'Switch to ' + (root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark') + ' theme';
+    (() => {
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      const label = () => {
+        const text = 'Switch to ' + (root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark') + ' theme';
         button.setAttribute('aria-label', text);
         button.title = text;
-      }
+      };
       label();
-      button.addEventListener('click', function () {
-        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
         try { localStorage.setItem('traaace-theme', next); } catch (e) { /* not remembered */ }
         label();
@@ -266,33 +266,33 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     /* Download buttons: point each at the newest published release's file. The links in the HTML are the fallback. */
-    (async function () {
-      var REPO = 'just8080/traaace_web';
-      var files = {
+    (async () => {
+      const REPO = 'just8080/traaace_web';
+      const files = {
         'mac-arm': /_aarch64\.dmg$/, 'mac-intel': /_x64\.dmg$/,
         'windows': /_x64-setup\.exe$/, 'windows-msi': /\.msi$/,
         'linux-appimage': /\.AppImage$/, 'linux-deb': /\.deb$/
       };
       try {
-        var releases = JSON.parse(sessionStorage.getItem('traaace-releases') || 'null');
+        let releases = JSON.parse(sessionStorage.getItem('traaace-releases') || 'null');
         if (!releases) {
-          var response = await fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=5');
+          const response = await fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=5');
           if (!response.ok) return;
           releases = await response.json();
           sessionStorage.setItem('traaace-releases', JSON.stringify(releases));
         }
-        var release = releases.find(function (r) { return !r.draft && r.assets && r.assets.length; });
+        const release = releases.find(r => !r.draft && r.assets && r.assets.length);
         if (!release) return;
-        var label = document.getElementById('release');
+        const label = document.getElementById('release');
         label.textContent = 'Latest: ' + (release.name || release.tag_name) + ' · ';
-        var all = document.createElement('a');
+        const all = document.createElement('a');
         all.href = release.html_url;
         all.textContent = 'release notes';
         label.appendChild(all);
-        Object.keys(files).forEach(function (key) {
-          var asset = release.assets.find(function (a) { return files[key].test(a.name); });
+        Object.keys(files).forEach(key => {
+          const asset = release.assets.find(a => files[key].test(a.name));
           if (!asset) return;
-          document.querySelectorAll('[data-download="' + key + '"]').forEach(function (link) {
+          document.querySelectorAll('[data-download="' + key + '"]').forEach(link => {
             link.href = asset.browser_download_url;
             link.title = asset.name + ' (' + (asset.size / 1048576).toFixed(1) + ' MB)';
           });
