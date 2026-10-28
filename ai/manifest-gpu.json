@@ -1,0 +1,645 @@
+{
+  "schema": 1,
+  "pack": "traaace-ai",
+  "edition": "gpu",
+  "version": "1.0.0",
+  "published": "2026-10-28T05:09:01Z",
+  "min_app_version": "0.6.0",
+  "notice": {
+    "title": "AI species detection (NVIDIA graphics card)",
+    "requires_acceptance": true,
+    "credits": [
+      "Alita (New Zealand species classifier), version 3.03: Olly and wekaResearch, with the Department of Conservation Predator Science team. Everyone involved is listed at https://github.com/Wologman/Alita",
+      "MegaDetector v5a (animal detection): Dan Morris and contributors, https://github.com/agentmorris/MegaDetector",
+      "ONNX Runtime: Microsoft, MIT licence",
+      "FFmpeg (video tool): https://ffmpeg.org, LGPL",
+      "NVIDIA CUDA runtime, cuBLAS and cuFFT 12.9, and cuDNN 9.27: NVIDIA Corporation. Downloaded straight from NVIDIA and used only by TRAAACE."
+    ],
+    "licenses": [
+      "GPL-3.0 (the models, inherited from MegaDetector / YOLOv5)",
+      "MIT (ONNX Runtime)",
+      "LGPL v2.1 or later (FFmpeg)",
+      "NVIDIA CUDA Toolkit End User License Agreement (https://docs.nvidia.com/cuda/eula/)",
+      "NVIDIA cuDNN Software License Agreement (https://docs.nvidia.com/deeplearning/cudnn/latest/reference/eula.html)"
+    ]
+  },
+  "model": {
+    "id": "alita-3.03",
+    "display_name": "Alita (New Zealand species)",
+    "classes": 81,
+    "detector_component": "detector",
+    "classifier_component": "classifier",
+    "class_names_component": "class-names",
+    "name_map_component": "name-map",
+    "defaults": {
+      "classifier_threshold": 0.5,
+      "detector_empty_threshold": 0.15,
+      "count_threshold": 0.2
+    },
+    "score_kind": "uncalibrated",
+    "calibration": null,
+    "source": {
+      "name": "Alita 3.03 official release (Exp_60, run_01), converted to ONNX by TRAAACE with the author's permission"
+    }
+  },
+  "components": [
+    {
+      "id": "onnxruntime-windows-x86_64",
+      "label": "ONNX Runtime (runs the models)",
+      "kind": "runtime",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/onnxruntime.dll",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/onnxruntime-windows-x86_64.gz",
+        "compression": "gzip",
+        "size": 6357145,
+        "sha256": "8c3d51aae50275c8359c773dca08067bf4c59360ece89a5cb132c11667bbf02b"
+      },
+      "unpacked": {
+        "size": 17720120,
+        "sha256": "f7b642a9605186d129c48a5941e1d70f0e90c89615c0d867bc14c4b63d11e9a8"
+      }
+    },
+    {
+      "id": "onnxruntime-providers-shared-windows-x86_64",
+      "label": "ONNX Runtime (runs the models)",
+      "kind": "runtime",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/onnxruntime_providers_shared.dll",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/onnxruntime-providers-shared-windows-x86_64.gz",
+        "compression": "gzip",
+        "size": 12516,
+        "sha256": "40dbc527fcb92c1b4bce838ba06e71be5d8eda9278ac236169166343222477fb"
+      },
+      "unpacked": {
+        "size": 21816,
+        "sha256": "1dd940354bb3bc226989d432330a66440cb98b87697bd51ed521379bdf230684"
+      }
+    },
+    {
+      "id": "onnxruntime-providers-cuda-windows-x86_64",
+      "label": "ONNX Runtime (runs the models)",
+      "kind": "runtime",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/onnxruntime_providers_cuda.dll",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/onnxruntime-providers-cuda-windows-x86_64.gz",
+        "compression": "gzip",
+        "size": 243281896,
+        "sha256": "9834a276a29cd7baed3eae59e0ea7a1b664faee0faffe1e5affa73b1dfc28855"
+      },
+      "unpacked": {
+        "size": 366181728,
+        "sha256": "4da86ce9f3a861c91e462a943f88c1a6b6f438e74a67f41b77950a02bfc4ba19"
+      }
+    },
+    {
+      "id": "onnxruntime-licence",
+      "label": "ONNX Runtime licence",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "runtime/ONNXRUNTIME-LICENSE.txt",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/onnxruntime-licence.txt",
+        "compression": "none",
+        "size": 1094,
+        "sha256": "c250d6278f0b47a6439fb7592b08b58a55eb9f535aa49a1db63211c3f982b674"
+      },
+      "unpacked": {
+        "size": 1094,
+        "sha256": "c250d6278f0b47a6439fb7592b08b58a55eb9f535aa49a1db63211c3f982b674"
+      }
+    },
+    {
+      "id": "ffmpeg-windows-x86_64",
+      "label": "Video tool (FFmpeg)",
+      "kind": "tool",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "tools/ffmpeg.exe",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/ffmpeg-windows-x86_64.gz",
+        "compression": "gzip",
+        "size": 1940926,
+        "sha256": "12639f5dfe119a2f3d5e953eaf71693a8ef9ec12936d1cbf9acf932bb75dc075"
+      },
+      "unpacked": {
+        "size": 5415424,
+        "sha256": "9ec5cb636650f9c43d5370226f6e2ce9df5a46942562f0185507d691c9952d72"
+      }
+    },
+    {
+      "id": "ffmpeg-source-windows-x86_64",
+      "label": "Video tool source details",
+      "kind": "data",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "tools/FFMPEG-SOURCE.txt",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/ffmpeg-source-windows-x86_64.txt",
+        "compression": "none",
+        "size": 976,
+        "sha256": "ae5a476418e14d3bc6be45f57d5dab70bfbfc546943f61e876c55f377a09794b"
+      },
+      "unpacked": {
+        "size": 976,
+        "sha256": "ae5a476418e14d3bc6be45f57d5dab70bfbfc546943f61e876c55f377a09794b"
+      }
+    },
+    {
+      "id": "ffmpeg-licence",
+      "label": "Video tool licence",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "tools/FFMPEG-LICENSE.txt",
+      "required": false,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/ffmpeg-licence.txt",
+        "compression": "none",
+        "size": 26517,
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+      },
+      "unpacked": {
+        "size": 26517,
+        "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+      }
+    },
+    {
+      "id": "detector",
+      "label": "Animal detector",
+      "kind": "model",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/detector.onnx",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/detector.gz",
+        "compression": "gzip",
+        "size": 448887213,
+        "sha256": "fc0fc87e7a352ae89b9f69577318a912aa2a36ddc7a4533ea9d507ff82b3282b"
+      },
+      "unpacked": {
+        "size": 561710008,
+        "sha256": "9c6f27127c3b9485c22ef930e9f5c652bd54b5d6d3f0a2a76df50d6104c4e981"
+      }
+    },
+    {
+      "id": "classifier",
+      "label": "Species classifier",
+      "kind": "model",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/classifier.onnx",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/classifier.gz",
+        "compression": "gzip",
+        "size": 78245912,
+        "sha256": "f3183c0e120c9ea71fb580070a1584448700cb6098e81167fbbdc8bab6aeda03"
+      },
+      "unpacked": {
+        "size": 84113605,
+        "sha256": "942dbb724012e52ad3491db4202ef08e29944f907043a593768b0bb528b14da2"
+      }
+    },
+    {
+      "id": "class-names",
+      "label": "Species list",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/class_names.json",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/class-names.json",
+        "compression": "none",
+        "size": 966,
+        "sha256": "4cd3ac8ed0ddcd762d3873381b244dc173d45acf9bfd0c25db19a2abb5d27f65"
+      },
+      "unpacked": {
+        "size": 966,
+        "sha256": "4cd3ac8ed0ddcd762d3873381b244dc173d45acf9bfd0c25db19a2abb5d27f65"
+      }
+    },
+    {
+      "id": "name-map",
+      "label": "Species names",
+      "kind": "data",
+      "platforms": [
+        "*"
+      ],
+      "install_path": "models/name_map.csv",
+      "required": true,
+      "download": {
+        "url": "https://github.com/just8080/traaace_ai/releases/download/ai-pack-gpu-v1.0.0/name-map.csv",
+        "compression": "none",
+        "size": 3852,
+        "sha256": "28e7fb3e208ecbb27d8ca972714e88ec032d49b908687c96fda7c82f367f570d"
+      },
+      "unpacked": {
+        "size": 3852,
+        "sha256": "28e7fb3e208ecbb27d8ca972714e88ec032d49b908687c96fda7c82f367f570d"
+      }
+    },
+    {
+      "id": "nvidia-cudart64_12",
+      "label": "NVIDIA CUDA runtime (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudart64_12.dll",
+      "extract": "cuda_cudart-windows-x86_64-12.9.79-archive/bin/cudart64_12.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/cuda_cudart/windows-x86_64/cuda_cudart-windows-x86_64-12.9.79-archive.zip",
+        "compression": "zip",
+        "size": 3521238,
+        "sha256": "179e9c43b0735ffe67207b3da556eb5a0c50f3047961882b7657d3b822d34ef8"
+      },
+      "unpacked": {
+        "size": 583680,
+        "sha256": "760c38928bbe5759f7b31ed6692599eb7ec83cedd5702e84c2b72028a89837e1"
+      }
+    },
+    {
+      "id": "nvidia-cuda_cudart-licence",
+      "label": "NVIDIA CUDA runtime (from NVIDIA)",
+      "kind": "data",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/NVIDIA-CUDA_CUDART-LICENSE.txt",
+      "extract": "cuda_cudart-windows-x86_64-12.9.79-archive/LICENSE",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/cuda_cudart/windows-x86_64/cuda_cudart-windows-x86_64-12.9.79-archive.zip",
+        "compression": "zip",
+        "size": 3521238,
+        "sha256": "179e9c43b0735ffe67207b3da556eb5a0c50f3047961882b7657d3b822d34ef8"
+      },
+      "unpacked": {
+        "size": 63522,
+        "sha256": "213f2f1cc4bfecd53eb1579edc89d6e3a024ddd2f77413b69b40e2bf3c114d84"
+      }
+    },
+    {
+      "id": "nvidia-cublas64_12",
+      "label": "NVIDIA cuBLAS (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cublas64_12.dll",
+      "extract": "libcublas-windows-x86_64-12.9.1.4-archive/bin/cublas64_12.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/libcublas/windows-x86_64/libcublas-windows-x86_64-12.9.1.4-archive.zip",
+        "compression": "zip",
+        "size": 549755186,
+        "sha256": "d534d98b0b453a98914dbf3adf47d7e84b55037abf02f87466439e1dcef581ed"
+      },
+      "unpacked": {
+        "size": 102518272,
+        "sha256": "90052a83efd1b57a8e3616a6590b335855f81b814a4f16eecb7b5bf6d1b1d4eb"
+      }
+    },
+    {
+      "id": "nvidia-cublaslt64_12",
+      "label": "NVIDIA cuBLAS (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cublasLt64_12.dll",
+      "extract": "libcublas-windows-x86_64-12.9.1.4-archive/bin/cublasLt64_12.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/libcublas/windows-x86_64/libcublas-windows-x86_64-12.9.1.4-archive.zip",
+        "compression": "zip",
+        "size": 549755186,
+        "sha256": "d534d98b0b453a98914dbf3adf47d7e84b55037abf02f87466439e1dcef581ed"
+      },
+      "unpacked": {
+        "size": 668669952,
+        "sha256": "c3a05ea244c937314afec09f87b91f814c7e27977681f6c67eb51bb06ced3a4a"
+      }
+    },
+    {
+      "id": "nvidia-libcublas-licence",
+      "label": "NVIDIA cuBLAS (from NVIDIA)",
+      "kind": "data",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/NVIDIA-LIBCUBLAS-LICENSE.txt",
+      "extract": "libcublas-windows-x86_64-12.9.1.4-archive/LICENSE",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/libcublas/windows-x86_64/libcublas-windows-x86_64-12.9.1.4-archive.zip",
+        "compression": "zip",
+        "size": 549755186,
+        "sha256": "d534d98b0b453a98914dbf3adf47d7e84b55037abf02f87466439e1dcef581ed"
+      },
+      "unpacked": {
+        "size": 67876,
+        "sha256": "72c22161fc1ebf242443d45158a7dd382d68597b00eeb7a7f539be5c6114be33"
+      }
+    },
+    {
+      "id": "nvidia-cufft64_11",
+      "label": "NVIDIA cuFFT (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cufft64_11.dll",
+      "extract": "libcufft-windows-x86_64-11.4.1.4-archive/bin/cufft64_11.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/libcufft/windows-x86_64/libcufft-windows-x86_64-11.4.1.4-archive.zip",
+        "compression": "zip",
+        "size": 198361265,
+        "sha256": "f26f80bb9abff3269c548e1559e8c2b4ba58ccb8acc6095bbc6404fc962d4b80"
+      },
+      "unpacked": {
+        "size": 287136768,
+        "sha256": "5b90655ca9cdf5d91cbdf2c72b995ec937eed0aef2d6954370c711b45c929b35"
+      }
+    },
+    {
+      "id": "nvidia-libcufft-licence",
+      "label": "NVIDIA cuFFT (from NVIDIA)",
+      "kind": "data",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/NVIDIA-LIBCUFFT-LICENSE.txt",
+      "extract": "libcufft-windows-x86_64-11.4.1.4-archive/LICENSE",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cuda/redist/libcufft/windows-x86_64/libcufft-windows-x86_64-11.4.1.4-archive.zip",
+        "compression": "zip",
+        "size": 198361265,
+        "sha256": "f26f80bb9abff3269c548e1559e8c2b4ba58ccb8acc6095bbc6404fc962d4b80"
+      },
+      "unpacked": {
+        "size": 67876,
+        "sha256": "72c22161fc1ebf242443d45158a7dd382d68597b00eeb7a7f539be5c6114be33"
+      }
+    },
+    {
+      "id": "nvidia-cudnn64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 270448,
+        "sha256": "7268ef53e32c2c574372326dfc9d94a26095f4ed9c89dba87cfb3ab1e40a6470"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_adv64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_adv64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_adv64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 270983792,
+        "sha256": "712ace96559e60b5be81a1097acb7609f601ff4cd0cdef848b013d671753b4b4"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_cnn64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_cnn64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_cnn64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 2997872,
+        "sha256": "dff4c446c855b3ab2d486aebf4c11388cf74da14d7bd0bfafb61c3a75481313d"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_engines_precompiled64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_engines_precompiled64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_engines_precompiled64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 528169072,
+        "sha256": "6b603ac45fc018a96f014d0c6cdbc8f480dce2dbe33b8ca38228a4e4c531f3fe"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_engines_runtime_compiled64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_engines_runtime_compiled64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_engines_runtime_compiled64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 45452912,
+        "sha256": "f92f4776261e4409aa9f84357c40bc3626700292a1d22025746388bea43ae11b"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_engines_tensor_ir64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_engines_tensor_ir64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_engines_tensor_ir64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 156272,
+        "sha256": "d7380a7c4ad90590968e97b4d8b43a616e7e0070bfdeeee04c4d0be85ad52394"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_ext64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_ext64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_ext64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 130160,
+        "sha256": "f20888488b701e429830e19cf59022e90a0c5dd398723162ea9f320b3ca06636"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_graph64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_graph64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_graph64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 99919472,
+        "sha256": "445e8c3e44a6a6035749380009ae35ae8c2bc246428229b79545a25238bb56e2"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_heuristic64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_heuristic64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_heuristic64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 94795376,
+        "sha256": "0634af738266cd36c912e99cd3807ee452450e963bf885be204fdcfb322cfc70"
+      }
+    },
+    {
+      "id": "nvidia-cudnn_ops64_9",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "library",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/cudnn_ops64_9.dll",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/bin/x64/cudnn_ops64_9.dll",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 105686640,
+        "sha256": "390bfe103a244c714fca5a1320950ba51a3173a7fbd6664ed535ce7367891ccd"
+      }
+    },
+    {
+      "id": "nvidia-cudnn-licence",
+      "label": "NVIDIA cuDNN (from NVIDIA)",
+      "kind": "data",
+      "platforms": [
+        "windows-x86_64"
+      ],
+      "install_path": "runtime/NVIDIA-CUDNN-LICENSE.txt",
+      "extract": "cudnn-windows-x86_64-9.27.0.42_cuda12-archive/LICENSE",
+      "required": true,
+      "download": {
+        "url": "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/windows-x86_64/cudnn-windows-x86_64-9.27.0.42_cuda12-archive.zip",
+        "compression": "zip",
+        "size": 1924314965,
+        "sha256": "93949680d6499ad0f17fc1abb131825c9dd41b460844513f608e840e0c8ce72b"
+      },
+      "unpacked": {
+        "size": 29574,
+        "sha256": "295a1b7118d3417f5d6a943e5f87b59e2a0631fb277129c3b15dee6248adc7cf"
+      }
+    }
+  ]
+}
