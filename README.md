@@ -1,13 +1,13 @@
 # TRAAACE 🌴   
 
 A fast, lightweight desktop app for tagging, organizing, and analyzing wildlife camera photos.
-Designed for conservationists, researchers, and nature enthusiasts in Aoteroa.
+Designed for conservationists, researchers, and nature enthusiasts in Aotearoa.
 
 It has adjustable species hotkeys and comments, and can export CSV, XLSX, JSON and TXT files.
 
 There are two workspaces, Quick and Project. The Project workspace lets you manage your folders and gives insights into your data. When you export your data and images, you can choose to merge the data and organise the images into subfolders by species.
 
-You can scale the interface to any size with CTRL/CMD + / -, and there is light and dark mode.
+You can scale the interface to any size with CTRL/CMD + / - and there are light and dark modes.
 
 There is an optional AI add-on for species suggestions that uses Alita, MegaDetector v5a, ONNX Runtime and FFmpeg. The repo for the AI add-on is [here](https://github.com/just8080/traaace_ai).
 
