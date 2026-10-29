@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVIDIA graphics card version (experimental) — TRAAACE</title>
+  <meta name="description"
+    content="An experimental TRAAACE for Windows computers with an NVIDIA graphics card: what you need, how it works, and how to send your results.">
+  <meta name="theme-color" content="#101214">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/app-icon.png">
+  <link rel="apple-touch-icon" href="images/app-icon.png">
+  <link rel="preload" href="fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* Set the theme before the page paints, so there is no flash. Follows the system unless the visitor chose. */
+    (() => {
+      let theme = 'dark';
+      try {
+        const saved = localStorage.getItem('traaace-theme');
+        if (saved === 'light' || saved === 'dark') theme = saved;
+        else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
+      } catch (e) { /* storage blocked: use the default */ }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="TRAAACE home">
+        <img src="images/app-icon.png" alt="" width="36" height="36">
+        TRAAACE
+        <span class="tag">v0.6</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#download">Download</a>
+        <a href="guide.html">Guide</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme"
+          title="Switch to light theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <span class="badge badge-danger"><span class="dot" aria-hidden="true"></span>Experimental</span>
+        <h1>TRAAACE for NVIDIA graphics cards</h1>
+        <p class="lead">
+          A test version for Windows computers with an NVIDIA graphics card. The AI species suggestions can run on
+          the graphics card instead of the processor, which can make scans much faster. It is new, so please tell us
+          how it goes.
+        </p>
+      </div>
+
+      <div class="guide-body" style="padding-top: 2.5rem;">
+
+        <section class="guide-card" id="for-you">
+          <h2>Is it for you?</h2>
+          <p>Check these before downloading. If you are not sure, use the normal version: it works on every
+            computer.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>You need</h3>
+              <ul>
+                <li><strong>Windows 10 or 11</strong>, 64-bit.</li>
+                <li>An <strong>NVIDIA graphics card</strong>: GeForce GTX 900 series or newer, or any RTX card (for
+                  example GTX 1060, RTX 2060, RTX 3060, RTX 4070).</li>
+                <li>An <strong>NVIDIA driver from 2023 or later</strong> (version 528 or newer). To check, open
+                  Command Prompt and type <code>nvidia-smi</code>: the driver version is near the top.</li>
+                <li>About <strong>7 GB of free disk space</strong> while it installs (about 3.5 GB afterwards).</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Not for you (yet)</h3>
+              <ul>
+                <li><strong>Mac or Linux</strong>: use the normal version. Macs already use their own graphics for
+                  the AI.</li>
+                <li>Computers <strong>without an NVIDIA card</strong>, like most laptops with Intel or AMD graphics.
+                  It still works there, but it is no faster than the normal version.</li>
+                <li><strong>AMD Radeon or Intel Arc</strong> graphics cards.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="how">
+          <h2>How it works</h2>
+          <p>It is the normal TRAAACE 0.6.1 with one extra choice when you set up the AI add-on.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>The graphics card add-on</h3>
+              <ul>
+                <li>When you set up AI, choose <strong>NVIDIA graphics card</strong> instead of
+                  <strong>Standard</strong>.</li>
+                <li>It is a large download, about <strong>3.5 GB</strong>. Most of it is NVIDIA's own CUDA software,
+                  which TRAAACE downloads straight from NVIDIA's website.</li>
+                <li>If your graphics card can't be used, the scan runs on the processor instead. The summary after a
+                  scan says which one it used.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Good to know</h3>
+              <ul>
+                <li>It <strong>replaces your normal TRAAACE</strong>. Your projects, tags and settings stay as they
+                  are. To go back, install the normal version from the <a href="index.html#download">Download</a>
+                  section: nothing is lost.</li>
+                <li>You can keep both AI add-ons and switch with <strong>Runs on</strong> in the AI panel. TRAAACE
+                  restarts to switch.</li>
+                <li>Windows will warn you the first time, as with the normal version: click <strong>More
+                    info</strong> &rarr; <strong>Run anyway</strong>.</li>
+                <li>If the graphics card add-on won't load, install Microsoft's <a
+                    href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Visual C++ Redistributable (x64)</a>.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="download">
+          <h2>Download</h2>
+          <p>Windows only. This is a test version, so keep your photos backed up as usual.</p>
+          <div class="gpu-download">
+            <a class="btn btn-danger" id="gpu-download" aria-disabled="true"
+              href="https://github.com/just8080/traaace_web/releases">Checking for the latest test version&hellip;</a>
+            <span class="release" id="gpu-release"></span>
+          </div>
+        </section>
+
+        <section class="guide-card" id="try">
+          <h2>Try it and send us your results</h2>
+          <p>A few minutes of testing helps a lot. A folder of 50 to 100 photos is plenty.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>Steps</h3>
+              <ol>
+                <li>Install the download above and open TRAAACE.</li>
+                <li>In the AI panel, click <strong>Set up AI&hellip;</strong>, choose <strong>NVIDIA graphics
+                    card</strong>, then <strong>Download and install</strong>.</li>
+                <li>Open a folder and press <strong>Scan</strong>. When it finishes, the summary says something like
+                  &ldquo;100 photos scanned in 0:45 on the graphics card&rdquo;.</li>
+                <li>To compare, set up the <strong>Standard</strong> add-on as well, choose <strong>Runs on:
+                    Processor</strong>, restart, and scan the same folder.</li>
+              </ol>
+            </div>
+            <div class="inner">
+              <h3>What to send us</h3>
+              <ul>
+                <li>Your <strong>graphics card and driver version</strong> (the top lines of
+                  <code>nvidia-smi</code>).</li>
+                <li>The <strong>scan summary</strong> for the graphics card, and for the processor if you compared.
+                </li>
+                <li>Anything that <strong>went wrong</strong>: the message you saw, or a screenshot.</li>
+                <li>Email it to <a
+                    href="mailto:hello@traaace.ing?subject=NVIDIA%20graphics%20card%20test">hello@traaace.ing</a>.
+                  Thank you!</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <p>GNU General Public License</p>
+        <p>For field research &amp; backyard observation.</p>
+        <p>Contact: <a href="mailto:hello@traaace.ing">hello@traaace.ing</a></p>
+      </div>
+      <div>
+        <p>&copy; <span id="year">2026</span> TRAAACE</p>
+        <p>NVIDIA, CUDA and GeForce are trademarks of NVIDIA Corporation. TRAAACE is not affiliated with NVIDIA.</p>
+        <p>AI suggestions: <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita</a> by Olly
+          and wekaResearch with the DOC Predator Science team, and <a
+            href="https://github.com/agentmorris/MegaDetector" target="_blank" rel="noopener">MegaDetector</a> by Dan
+          Morris and contributors</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle: the icon shows the theme it will switch to, like the app. */
+    (() => {
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      const label = () => {
+        const text = 'Switch to ' + (root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark') + ' theme';
+        button.setAttribute('aria-label', text);
+        button.title = text;
+      };
+      label();
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('traaace-theme', next); } catch (e) { /* not remembered */ }
+        label();
+      });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* The download: the newest published release whose tag starts with "gpu-" (an experimental build, published
+       as a pre-release), and its Windows installer. Uses the same cached list as the home page. */
+    (async () => {
+      const REPO = 'just8080/traaace_web';
+      const link = document.getElementById('gpu-download');
+      const info = document.getElementById('gpu-release');
+      const unavailable = () => {
+        link.textContent = 'Not available yet';
+        info.textContent = 'Check back soon, or see all builds on ';
+        const all = document.createElement('a');
+        all.href = 'https://github.com/' + REPO + '/releases';
+        all.textContent = 'GitHub Releases';
+        info.appendChild(all);
+      };
+      try {
+        let releases = JSON.parse(sessionStorage.getItem('traaace-releases') || 'null');
+        if (!releases) {
+          const response = await fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=20');
+          if (!response.ok) return unavailable();
+          releases = await response.json();
+          sessionStorage.setItem('traaace-releases', JSON.stringify(releases));
+        }
+        const release = releases.find(r => !r.draft && r.tag_name.startsWith('gpu-')
+          && r.assets.some(a => /_x64-setup\.exe$/.test(a.name)));
+        if (!release) return unavailable();
+        const asset = release.assets.find(a => /_x64-setup\.exe$/.test(a.name));
+        link.href = asset.browser_download_url;
+        link.removeAttribute('aria-disabled');
+        link.textContent = 'Download for Windows (' + (asset.size / 1048576).toFixed(0) + ' MB, .exe)';
+        info.textContent = (release.name || release.tag_name) + ' · ';
+        const notes = document.createElement('a');
+        notes.href = release.html_url;
+        notes.textContent = 'release notes';
+        info.appendChild(notes);
+      } catch (err) {
+        unavailable();
+      }
+    })();
+  </script>
+</body>
+
+</html>

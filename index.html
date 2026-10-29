@@ -29,7 +29,7 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 
 <body>
@@ -185,6 +185,14 @@
                 href="https://github.com/just8080/traaace_web/releases">Universal <small>.AppImage</small></a>
             </div>
           </div>
+          <div class="experimental">
+            <div>
+              <h3>Experimental: NVIDIA graphics card</h3>
+              <p>A test version for Windows computers with an NVIDIA graphics card, where AI scans can run much
+                faster. Read what you need before downloading.</p>
+            </div>
+            <a class="btn btn-danger" href="gpu.html">Experimental download</a>
+          </div>
         </div>
       </div>
     </section>
@@ -265,7 +273,8 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* Download buttons: point each at the newest published release's file. The links in the HTML are the fallback. */
+    /* Download buttons: point each at the newest published release's file. The links in the HTML are the fallback.
+       Pre-releases (the experimental NVIDIA version) never replace the normal download. */
     (async () => {
       const REPO = 'just8080/traaace_web';
       const files = {
@@ -276,12 +285,12 @@
       try {
         let releases = JSON.parse(sessionStorage.getItem('traaace-releases') || 'null');
         if (!releases) {
-          const response = await fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=5');
+          const response = await fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=20');
           if (!response.ok) return;
           releases = await response.json();
           sessionStorage.setItem('traaace-releases', JSON.stringify(releases));
         }
-        const release = releases.find(r => !r.draft && r.assets && r.assets.length);
+        const release = releases.find(r => !r.draft && !r.prerelease && r.assets && r.assets.length);
         if (!release) return;
         const label = document.getElementById('release');
         label.textContent = 'Latest: ' + (release.name || release.tag_name) + ' · ';
