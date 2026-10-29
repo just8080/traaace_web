@@ -77,8 +77,7 @@
 
         <section class="guide-card" id="for-you">
           <h2>Is it for you?</h2>
-          <p>Check these before downloading. If you are not sure, use the normal version: it works on every
-            computer.</p>
+          <p>If you are not sure, use the normal version: it works on every computer.</p>
           <div class="cols">
             <div class="inner">
               <h3>You need</h3>
@@ -97,7 +96,8 @@
                 <li><strong>Mac or Linux</strong>: use the normal version. Macs already use their own graphics for
                   the AI.</li>
                 <li>Computers <strong>without an NVIDIA card</strong>, like most laptops with Intel or AMD graphics.
-                  It still works there, but it is no faster than the normal version.</li>
+                </li>
+                <li>It will default back to the CPU if no CUDA graphics card is found.</li>
                 <li><strong>AMD Radeon or Intel Arc</strong> graphics cards.</li>
               </ul>
             </div>
@@ -112,7 +112,8 @@
               <h3>The graphics card add-on</h3>
               <ul>
                 <li>When you set up AI, choose <strong>NVIDIA graphics card</strong> instead of
-                  <strong>Standard</strong>.</li>
+                  <strong>Standard</strong>.
+                </li>
                 <li>It is a large download, about <strong>3.5 GB</strong>. Most of it is NVIDIA's own CUDA software,
                   which TRAAACE downloads straight from NVIDIA's website.</li>
                 <li>If your graphics card can't be used, the scan runs on the processor instead. The summary after a
@@ -166,7 +167,8 @@
               <h3>What to send us</h3>
               <ul>
                 <li>Your <strong>graphics card and driver version</strong> (the top lines of
-                  <code>nvidia-smi</code>).</li>
+                  <code>nvidia-smi</code>).
+                </li>
                 <li>The <strong>scan summary</strong> for the graphics card, and for the processor if you compared.
                 </li>
                 <li>Anything that <strong>went wrong</strong>: the message you saw, or a screenshot.</li>
@@ -193,8 +195,8 @@
         <p>&copy; <span id="year">2026</span> TRAAACE</p>
         <p>NVIDIA, CUDA and GeForce are trademarks of NVIDIA Corporation. TRAAACE is not affiliated with NVIDIA.</p>
         <p>AI suggestions: <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita</a> by Olly
-          and wekaResearch with the DOC Predator Science team, and <a
-            href="https://github.com/agentmorris/MegaDetector" target="_blank" rel="noopener">MegaDetector</a> by Dan
+          and wekaResearch with the DOC Predator Science team, and <a href="https://github.com/agentmorris/MegaDetector"
+            target="_blank" rel="noopener">MegaDetector</a> by Dan
           Morris and contributors</p>
       </div>
     </div>
