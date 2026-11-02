@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms and licences — TRAAACE</title>
+  <meta name="description"
+    content="The terms for using TRAAACE, its GPL-3.0 licence, and the licences of the AI models, ONNX Runtime, FFmpeg and other parts it uses.">
+  <meta name="theme-color" content="#101214">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/app-icon.png">
+  <link rel="apple-touch-icon" href="images/app-icon.png">
+  <link rel="preload" href="fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* Set the theme before the page paints, so there is no flash. Follows the system unless the visitor chose. */
+    (() => {
+      let theme = 'dark';
+      try {
+        const saved = localStorage.getItem('traaace-theme');
+        if (saved === 'light' || saved === 'dark') theme = saved;
+        else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
+      } catch (e) { /* storage blocked: use the default */ }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="TRAAACE home">
+        <img src="images/app-icon.png" alt="" width="36" height="36">
+        TRAAACE
+        <span class="tag">v0.6</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#download">Download</a>
+        <a href="guide.html">Guide</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme"
+          title="Switch to light theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>Terms and licences</h1>
+        <p class="lead">
+          The terms for using TRAAACE, in plain language, and the licences of the parts it is built from.
+          Last updated 2 November 2026.
+        </p>
+      </div>
+
+      <div class="guide-body" style="padding-top: 2.5rem;">
+
+        <section class="guide-card" id="about">
+          <h2>About these terms</h2>
+          <p>These terms cover the TRAAACE app, its optional AI add-ons, and this website. TRAAACE is free, made by an
+            independent developer in Aotearoa New Zealand. By downloading or using it, you agree to these terms. If
+            you don't agree, please don't use it.</p>
+        </section>
+
+        <section class="guide-card" id="licence">
+          <h2>TRAAACE's licence: GPL-3.0</h2>
+          <p>TRAAACE is free and open source under the <a href="https://www.gnu.org/licenses/gpl-3.0.html"
+              target="_blank" rel="noopener">GNU General Public License, version 3</a> (GPL-3.0). The full text comes
+            with the source code.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>You can</h3>
+              <ul>
+                <li>Use TRAAACE for anything: personal projects, research, conservation work or business.</li>
+                <li>Copy it and give it to others.</li>
+                <li>Read and change the source code.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>If you share a changed version</h3>
+              <ul>
+                <li>It must also be under GPL-3.0, with its source code available to the people you give it to.</li>
+                <li>Keep the copyright and licence notices.</li>
+                <li>The source code of every normal release is at <a href="https://github.com/just8080/traaace_app"
+                    target="_blank" rel="noopener">github.com/just8080/traaace_app</a>. The source of an experimental
+                  build is published when it joins a normal release; email us if you need it sooner.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="components">
+          <h2>Parts made by others</h2>
+          <p>TRAAACE and its add-ons include work by other people, each under its own licence. Thank you to all of
+            them.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>AI models (in the AI add-on)</h3>
+              <ul>
+                <li><strong>Alita 3.03</strong>, the New Zealand species classifier, by Olly and wekaResearch with the
+                  Department of Conservation Predator Science team. GPL-3.0. Hosted with Olly's permission.
+                  <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita on GitHub</a>.</li>
+                <li><strong>MegaDetector v5a</strong>, the animal detector, by Dan Morris and contributors. Its code is
+                  MIT-licensed; the v5 model is built on YOLOv5 by Ultralytics, so the add-on's models are
+                  distributed under GPL-3.0. <a href="https://github.com/agentmorris/MegaDetector" target="_blank"
+                    rel="noopener">MegaDetector on GitHub</a>.</li>
+                <li>Both were converted to the ONNX format for TRAAACE. The add-on files are at <a
+                    href="https://github.com/just8080/traaace_ai" target="_blank"
+                    rel="noopener">github.com/just8080/traaace_ai</a> (GPL-3.0).</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Software in the AI add-on</h3>
+              <ul>
+                <li><strong>ONNX Runtime</strong> by Microsoft, which runs the models. MIT licence.</li>
+                <li><strong>FFmpeg</strong>, the video tool, from <a href="https://ffmpeg.org" target="_blank"
+                    rel="noopener">ffmpeg.org</a>. LGPL v2.1 or later. TRAAACE uses an unmodified, decode-only build;
+                  each copy comes with its licence and a note of the exact source and build settings, and the build
+                  recipe is in the traaace_ai repository.</li>
+                <li><strong>NVIDIA CUDA and cuDNN</strong> (the experimental NVIDIA add-on only). These are not
+                  distributed by TRAAACE: the app downloads them straight from NVIDIA, under NVIDIA's <a
+                    href="https://docs.nvidia.com/cuda/eula/" target="_blank" rel="noopener">CUDA licence</a> and <a
+                    href="https://docs.nvidia.com/deeplearning/cudnn/latest/reference/eula.html" target="_blank"
+                    rel="noopener">cuDNN licence</a>. By installing that add-on you accept them.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>The app and this website</h3>
+              <ul>
+                <li>Built with <strong>Tauri</strong> and other open-source libraries, mostly under the MIT and
+                  Apache 2.0 licences. Their notices come with the source code.</li>
+                <li><strong>Inter</strong> and <strong>JetBrains Mono</strong> fonts: SIL Open Font License 1.1.</li>
+                <li>Kakapo logo: <a href="https://thenounproject.com/browse/icons/term/kakapo/" target="_blank"
+                    rel="noopener">Kakapo by Cimrin</a> from Noun Project, <a
+                    href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="ai">
+          <h2>AI suggestions</h2>
+          <p>The AI add-on suggests species and counts. It is a helper, not an expert.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>Please keep in mind</h3>
+              <ul>
+                <li>Suggestions can be wrong, and the confidence shown is a rough guide, not a probability.</li>
+                <li>Check suggestions yourself before you rely on them, especially for pest control, reporting,
+                  research or anything with real consequences.</li>
+                <li>You are responsible for the tags you keep and export.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Experimental versions</h3>
+              <ul>
+                <li>Experimental builds, like the <a href="gpu.html">NVIDIA graphics card version</a>, are for
+                  testing. They may not work on your computer, and may change or be withdrawn.</li>
+                <li>Keep your photos and exports backed up when you use them.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="your-data">
+          <h2>Your photos and data</h2>
+          <div class="cols">
+            <div class="inner">
+              <h3>Yours, on your computer</h3>
+              <ul>
+                <li>Your photos, videos, tags and exports stay yours. TRAAACE never uploads them. See the <a
+                    href="privacy.html">privacy page</a>.</li>
+                <li>Keep your own backups. Quick Classify keeps nothing once you close it, so export first.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Your responsibilities</h3>
+              <ul>
+                <li>Make sure you are allowed to use the photos you open, for example when cameras are on someone
+                  else's land.</li>
+                <li>Trail cameras sometimes photograph people. Handle those photos with care and in line with
+                  privacy law.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="warranty">
+          <h2>No warranty</h2>
+          <p>TRAAACE is free and provided "as is", without any warranty, as the GPL-3.0 licence says. To the extent the
+            law allows, the developer is not liable for any loss or damage from using it, including lost data, missed
+            or wrong identifications, or problems with your computer. Nothing in these terms takes away rights you
+            have under New Zealand law that can't be excluded.</p>
+        </section>
+
+        <section class="guide-card" id="other">
+          <h2>Other things</h2>
+          <div class="cols">
+            <div class="inner">
+              <h3>Independent</h3>
+              <ul>
+                <li>TRAAACE is an independent project. It is not made or endorsed by the Department of Conservation,
+                  NVIDIA, Microsoft or Apple.</li>
+                <li>NVIDIA, CUDA and GeForce are trademarks of NVIDIA Corporation. Windows is a trademark of Microsoft.
+                  Mac is a trademark of Apple. Other names belong to their owners.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Changes, law and contact</h3>
+              <ul>
+                <li>These terms may change. The date at the top shows the latest version.</li>
+                <li>New Zealand law applies.</li>
+                <li>Questions? Email <a href="mailto:hello@traaace.ing">hello@traaace.ing</a>.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <p><a href="terms.html#licence">GNU General Public License</a></p>
+        <p>For field research &amp; backyard observation.</p>
+        <p>Contact: <a href="mailto:hello@traaace.ing">hello@traaace.ing</a></p>
+        <p><a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
+      </div>
+      <div>
+        <p>&copy; <span id="year">2026</span> TRAAACE</p>
+        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
+            target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
+            href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+        <p>AI suggestions: <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita</a> by Olly
+          and wekaResearch with the DOC Predator Science team, and <a href="https://github.com/agentmorris/MegaDetector"
+            target="_blank" rel="noopener">MegaDetector</a> by Dan Morris and contributors</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle: the icon shows the theme it will switch to, like the app. */
+    (() => {
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      const label = () => {
+        const text = 'Switch to ' + (root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark') + ' theme';
+        button.setAttribute('aria-label', text);
+        button.title = text;
+      };
+      label();
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('traaace-theme', next); } catch (e) { /* not remembered */ }
+        label();
+      });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

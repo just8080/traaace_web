@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy — TRAAACE</title>
+  <meta name="description"
+    content="TRAAACE runs on your own computer: your photos and tags never leave it. No accounts, no analytics, no tracking. What the app and this website do and don't collect.">
+  <meta name="theme-color" content="#101214">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/app-icon.png">
+  <link rel="apple-touch-icon" href="images/app-icon.png">
+  <link rel="preload" href="fonts/Inter-roman.var.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>
+    /* Set the theme before the page paints, so there is no flash. Follows the system unless the visitor chose. */
+    (() => {
+      let theme = 'dark';
+      try {
+        const saved = localStorage.getItem('traaace-theme');
+        if (saved === 'light' || saved === 'dark') theme = saved;
+        else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) theme = 'light';
+      } catch (e) { /* storage blocked: use the default */ }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="TRAAACE home">
+        <img src="images/app-icon.png" alt="" width="36" height="36">
+        TRAAACE
+        <span class="tag">v0.6</span>
+      </a>
+      <nav aria-label="Main">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#download">Download</a>
+        <a href="guide.html">Guide</a>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light theme"
+          title="Switch to light theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <div class="page-head">
+        <h1>Privacy</h1>
+        <p class="lead">
+          TRAAACE runs on your own computer. Your photos, videos and tags never leave it. There are no accounts, no
+          analytics and no tracking. Last updated 2 November 2026.
+        </p>
+      </div>
+
+      <div class="guide-body" style="padding-top: 2.5rem;">
+
+        <section class="guide-card" id="app">
+          <h2>The app</h2>
+          <p>Everything TRAAACE stores is on your computer, in its own folders. Nothing is sent to us.</p>
+          <div class="cols">
+            <div class="inner">
+              <h3>What it keeps on your computer</h3>
+              <ul>
+                <li><strong>Projects</strong>: your folders, tags, counts, comments, species keys and settings, in a
+                  database file.</li>
+                <li><strong>Thumbnails</strong> of your photos and videos, so the grid opens quickly.</li>
+                <li><strong>AI suggestions</strong> for project photos, and the AI add-on if you install it.</li>
+                <li>A <strong>log file</strong> to help fix problems. It can include file and folder names. It stays on
+                  your computer unless you choose to send it to us.</li>
+                <li>Quick Classify keeps nothing once you close the session, apart from your settings.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>When it goes online</h3>
+              <ul>
+                <li>Only when you set up, update or check for the <strong>AI add-on</strong>. It downloads a signed
+                  list from traaace.ing, the files from GitHub, and, for the experimental NVIDIA add-on, NVIDIA's
+                  files from NVIDIA.</li>
+                <li>Those services see your IP address and the files requested, as with any download. Nothing about
+                  your photos or tags is sent.</li>
+                <li>Links you click, like the credits, open in your web browser.</li>
+                <li>It doesn't check for updates in the background, and it sends no usage data or crash reports.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="website">
+          <h2>This website</h2>
+          <div class="cols">
+            <div class="inner">
+              <h3>What it uses</h3>
+              <ul>
+                <li><strong>No cookies, analytics or ads</strong>, and no outside fonts or trackers.</li>
+                <li>Your <strong>theme choice</strong> (light or dark) is saved in your browser.</li>
+                <li>To keep the download buttons up to date, your browser asks GitHub for the latest release and
+                  keeps a copy until you close the tab.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Hosting and downloads</h3>
+              <ul>
+                <li>The site is hosted on GitHub Pages, and the installers are downloaded from GitHub. GitHub may log
+                  your IP address for security; see <a
+                    href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+                    target="_blank" rel="noopener">GitHub's privacy statement</a>.</li>
+                <li>NVIDIA's own <a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank"
+                    rel="noopener">privacy policy</a> applies to the files the NVIDIA add-on downloads from them.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="email">
+          <h2>If you email us</h2>
+          <div class="cols">
+            <div class="inner">
+              <h3>How we use it</h3>
+              <ul>
+                <li>We use your email, and anything you send like screenshots, test results or logs, only to reply and
+                  to improve TRAAACE.</li>
+                <li>We don't sell or share it, and we keep it only as long as it's useful.</li>
+                <li>We may describe what testers report (for example, how fast scans were on a graphics card), but
+                  never with your name or email unless you agree.</li>
+              </ul>
+            </div>
+            <div class="inner">
+              <h3>Your rights</h3>
+              <ul>
+                <li>Under New Zealand's Privacy Act 2020 you can ask to see, correct or delete what we hold about you:
+                  email <a href="mailto:hello@traaace.ing">hello@traaace.ing</a>.</li>
+                <li>If you're not happy with our answer, you can contact the <a href="https://www.privacy.org.nz/"
+                    target="_blank" rel="noopener">Privacy Commissioner</a>.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="guide-card" id="changes">
+          <h2>Changes</h2>
+          <p>If TRAAACE ever starts collecting anything new, this page will say so before it happens. The date at the
+            top shows the latest version. See also the <a href="terms.html">terms and licences</a>.</p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <p><a href="terms.html#licence">GNU General Public License</a></p>
+        <p>For field research &amp; backyard observation.</p>
+        <p>Contact: <a href="mailto:hello@traaace.ing">hello@traaace.ing</a></p>
+        <p><a href="terms.html">Terms</a> &middot; <a href="privacy.html">Privacy</a></p>
+      </div>
+      <div>
+        <p>&copy; <span id="year">2026</span> TRAAACE</p>
+        <p>Kakapo logo: Kakapo by Cimrin from <a href="https://thenounproject.com/browse/icons/term/kakapo/"
+            target="_blank" rel="noopener" title="kakapo Icons">Noun Project</a> (<a
+            href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>)</p>
+        <p>AI suggestions: <a href="https://github.com/Wologman/Alita" target="_blank" rel="noopener">Alita</a> by Olly
+          and wekaResearch with the DOC Predator Science team, and <a href="https://github.com/agentmorris/MegaDetector"
+            target="_blank" rel="noopener">MegaDetector</a> by Dan Morris and contributors</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle: the icon shows the theme it will switch to, like the app. */
+    (() => {
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      const label = () => {
+        const text = 'Switch to ' + (root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark') + ' theme';
+        button.setAttribute('aria-label', text);
+        button.title = text;
+      };
+      label();
+      button.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('traaace-theme', next); } catch (e) { /* not remembered */ }
+        label();
+      });
+    })();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
